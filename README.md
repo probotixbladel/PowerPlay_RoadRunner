@@ -1,7 +1,7 @@
 # Eigen Comment
 
 Ik zou hier wel allemaal comments bij kunnen zetten als bij FreightFrenzyBasic maar op deze site staat alles perfect uitgelegd en gedocumenteerd van begin tot eind.
-https://learnroadrunner.com/#frequently-asked-questions
+https://learnroadrunner.com/
 
 # Road Runner Quickstart
 
