@@ -11,6 +11,13 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
+/*
+For more background information see: Github.com/OpenFTC/EasyOpenCV/blob/master/doc/user_docs/......
+  - camera_initialization_overview.md
+  - pipelins_overview.md
+  !! Strongly recommended to read these docs first!!
+*/
+
 @Autonomous
 public class WebcamExample extends LinearOpMode
 {
