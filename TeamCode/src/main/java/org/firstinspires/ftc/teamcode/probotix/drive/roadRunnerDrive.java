@@ -95,6 +95,10 @@ public class roadRunnerDrive extends LinearOpMode {
                         Hardware.setGear(hardware.Gear.FOURTH);
                         turnspeed = 0.6;
                     }
+                    if (gamepad2.x) {
+                    //hier komt nu de code om de lift te bewegen
+                    }
+                }
 
 
                 case AUTOMATIC_CONTROL:

@@ -19,7 +19,7 @@ For more background information see: Github.com/OpenFTC/EasyOpenCV/blob/master/d
 */
 
 @Autonomous
-public class WebcamExample extends LinearOpMode
+public class  WebcamExample extends LinearOpMode
 {
     OpenCvCamera webcam;
     DeterminationPipeline pipeline = new DeterminationPipeline();

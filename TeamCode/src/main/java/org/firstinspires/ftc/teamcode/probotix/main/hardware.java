@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.probotix.drive.basicdrive;
 
 
 public class hardware {
-    private DcMotorEx wheelLeftFront, wheelRightFront, wheelLeftRear, wheelRightRear;
+    private DcMotorEx wheelLeftFront, wheelRightFront, wheelLeftRear, wheelRightRear, liftMotor;
 
 
     private HardwareMap hardwareMap;
@@ -31,6 +31,8 @@ public class hardware {
         this.wheelRightFront = (DcMotorEx) hardwareMap.dcMotor.get("wheelRightFront");
         this.wheelLeftRear = (DcMotorEx) hardwareMap.dcMotor.get("wheelLeftRear");
         this.wheelRightRear = (DcMotorEx) hardwareMap.dcMotor.get("wheelRightRear");
+        this.liftMotor = (DcMotorEx) hardwareMap.dcMotor.get("liftMotor");
+        this.carouselMotor = (DcMotorEx) hardwareMap.dcMotor.get("carouselMotor")
         reset();
     }
 
