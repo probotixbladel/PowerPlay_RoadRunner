@@ -1,14 +1,17 @@
 package org.firstinspires.ftc.teamcode.probotix.main;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.probotix.drive.basicdrive;
 
 
 public class hardware {
-    private DcMotorEx wheelLeftFront, wheelRightFront, wheelLeftRear, wheelRightRear, liftMotor;
+    private DcMotorEx wheelLeftFront, wheelRightFront, wheelLeftRear, wheelRightRear, liftMotor, carouselMotor, intakeMotor;
+    private Servo deliverServo;
 
 
     private HardwareMap hardwareMap;
@@ -32,7 +35,9 @@ public class hardware {
         this.wheelLeftRear = (DcMotorEx) hardwareMap.dcMotor.get("wheelLeftRear");
         this.wheelRightRear = (DcMotorEx) hardwareMap.dcMotor.get("wheelRightRear");
         this.liftMotor = (DcMotorEx) hardwareMap.dcMotor.get("liftMotor");
-        this.carouselMotor = (DcMotorEx) hardwareMap.dcMotor.get("carouselMotor")
+        this.carouselMotor = (DcMotorEx) hardwareMap.dcMotor.get("carouselMotor");
+        this.deliverServo = hardwareMap.servo.get("deliverServo");
+        this.intakeMotor = (DcMotorEx) hardwareMap.dcMotor.get("intakeMotor");
         reset();
     }
 
@@ -41,6 +46,13 @@ public class hardware {
         wheelRightFront.setPower(0);
         wheelLeftRear.setPower(0);
         wheelRightRear.setPower(0);
+
+        liftMotor.setPower(0);
+        liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+        deliverServo.setPosition(0.75);
 
         wheelLeftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         wheelLeftRear.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -86,4 +98,19 @@ public class hardware {
         return wheelRightRear;
     }
 
+    public DcMotorEx getLiftMotor() {
+        return liftMotor;
+    }
+
+    public DcMotorEx getCarouselMotor() {
+        return carouselMotor;
+    }
+
+    public DcMotorEx getIntakeMotor() {
+        return intakeMotor;
+    }
+
+    public Servo getDeliverServo() {
+        return deliverServo;
+    }
 }

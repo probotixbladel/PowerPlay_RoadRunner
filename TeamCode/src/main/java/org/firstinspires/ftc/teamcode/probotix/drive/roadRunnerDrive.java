@@ -38,6 +38,7 @@ import org.firstinspires.ftc.teamcode.probotix.main.hardware;
 public class roadRunnerDrive extends LinearOpMode {
     private hardware Hardware;
 
+
     // Define 2 states, drive control or automatic control
     enum Mode {
         DRIVER_CONTROL,
@@ -54,6 +55,8 @@ public class roadRunnerDrive extends LinearOpMode {
         Hardware.init();
 
         Hardware.setGear(hardware.Gear.FOURTH);
+
+
 
         double turnspeed = 0.8;
 
@@ -95,10 +98,45 @@ public class roadRunnerDrive extends LinearOpMode {
                         Hardware.setGear(hardware.Gear.FOURTH);
                         turnspeed = 0.6;
                     }
-                    if (gamepad2.x) {
-                    //hier komt nu de code om de lift te bewegen
+
+                    //lift: start:0 eind:-2050
+                    if (gamepad2.dpad_down) {
+                        Hardware.getLiftMotor().setTargetPosition(0);
+                        Hardware.getLiftMotor().setPower(0.4);
+
+                    } else if (gamepad2.dpad_right) {
+                        Hardware.getLiftMotor().setTargetPosition(-1000);
+                        Hardware.getLiftMotor().setPower(0.4);
+
+                    } else if (gamepad2.dpad_up) {
+                        Hardware.getLiftMotor().setTargetPosition(-1510);
+                        Hardware.getLiftMotor().setPower(0.4);
+
                     }
-                }
+
+
+                    //servo: start:0.73 mid:0.45 eind:0.15
+                    if (gamepad2.a) {
+                        Hardware.getDeliverServo().setPosition(0.73);
+                    } else if (gamepad2.b) {
+                        Hardware.getDeliverServo().setPosition(0.45);
+                    } else if (gamepad2.x) {
+                        Hardware.getDeliverServo().setPosition(0.13);
+                    }
+
+                    if (gamepad2.left_bumper) {
+                        Hardware.getIntakeMotor().setPower(0.5);
+                    } else {
+                        Hardware.getIntakeMotor().setPower(0);
+                    }
+
+                    telemetry.addData("liftTicks", Hardware.getLiftMotor().getCurrentPosition());
+                    telemetry.update();
+
+                    //servo: start:0.73 mid:0.45 eind:0.12
+                    //lift: start:0 eind:-2050
+
+
 
 
                 case AUTOMATIC_CONTROL:
@@ -113,6 +151,8 @@ public class roadRunnerDrive extends LinearOpMode {
                     }
 
                     break;
+
+
             }
         }
     }
