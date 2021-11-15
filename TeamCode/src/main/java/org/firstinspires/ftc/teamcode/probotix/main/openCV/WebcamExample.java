@@ -42,19 +42,19 @@ public class  WebcamExample extends LinearOpMode
             public void onError(int errorCode){}
         });
 
-        FtcDashboard dashboard = FtcDashboard.getInstance();
-        dashboard.startCameraStream(webcam, 10);
-        Telemetry dashboardTelemetry = dashboard.getTelemetry();
+        //FtcDashboard dashboard = FtcDashboard.getInstance();
+       // dashboard.startCameraStream(webcam, 10);
+        //Telemetry dashboardTelemetry = dashboard.getTelemetry();
 
 
-        /*
+
         while (!opModeIsActive()){
             telemetry.addData("location", pipeline.getLocation());
             telemetry.update();
-            dashboardTelemetry.addData("location", pipeline.getLocation());
-            dashboardTelemetry.update();
+           // dashboardTelemetry.addData("location", pipeline.getLocation());
+            //dashboardTelemetry.update();
         }
-         */
+
 
         telemetry.addLine("Init ready! Wait for start...");
         telemetry.update();

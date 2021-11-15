@@ -59,6 +59,8 @@ public class roadRunnerDrive extends LinearOpMode {
 
 
         double turnspeed = 0.8;
+        int x = 1;
+        boolean g2ltPS = false;
 
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -105,6 +107,10 @@ public class roadRunnerDrive extends LinearOpMode {
                         Hardware.getLiftMotor().setPower(0.4);
 
                     } else if (gamepad2.dpad_right) {
+                        Hardware.getLiftMotor().setTargetPosition(-470);
+                        Hardware.getLiftMotor().setPower(0.4);
+
+                    } else if (gamepad2.dpad_left) {
                         Hardware.getLiftMotor().setTargetPosition(-1000);
                         Hardware.getLiftMotor().setPower(0.4);
 
@@ -117,17 +123,38 @@ public class roadRunnerDrive extends LinearOpMode {
 
                     //servo: start:0.73 mid:0.45 eind:0.15
                     if (gamepad2.a) {
-                        Hardware.getDeliverServo().setPosition(0.73);
+                        Hardware.getDeliverServo().setPosition(0.75);
                     } else if (gamepad2.b) {
                         Hardware.getDeliverServo().setPosition(0.45);
-                    } else if (gamepad2.x) {
-                        Hardware.getDeliverServo().setPosition(0.13);
+                    } else if (gamepad2.y) {
+                        Hardware.getDeliverServo().setPosition(0.14);
                     }
 
-                    if (gamepad2.left_bumper) {
-                        Hardware.getIntakeMotor().setPower(0.5);
+                    if (gamepad2.right_bumper) {
+                        Hardware.getIntakeMotor().setPower(-0.7);
                     } else {
                         Hardware.getIntakeMotor().setPower(0);
+                    }
+
+                    if (gamepad2.right_trigger > 0.1) {
+                        Hardware.getIntakeMotor().setPower(0.7);
+                    }
+
+                    if (leftBumperClick(gamepad2.left_bumper)) {
+                        x = x * -1;
+
+                    }
+
+                    if (gamepad2.left_trigger > 0.2){
+                        Hardware.getCarouselMotor().setPower(x * 0.5);
+                    } else {
+                        Hardware.getCarouselMotor().setPower(0);
+                    }
+
+                    if (x == 1) {
+                        telemetry.addData("CarouselColour","Red");
+                    } else if (x == -1) {
+                        telemetry.addData("CarouselColour","Blue");
                     }
 
                     telemetry.addData("liftTicks", Hardware.getLiftMotor().getCurrentPosition());
@@ -156,4 +183,13 @@ public class roadRunnerDrive extends LinearOpMode {
             }
         }
     }
+
+    private boolean buttonPreviousState;
+    public boolean leftBumperClick (boolean button) {
+        boolean returnVal;
+        returnVal = button && !buttonPreviousState;
+        buttonPreviousState = button;
+        return returnVal;
+    }
+
 }

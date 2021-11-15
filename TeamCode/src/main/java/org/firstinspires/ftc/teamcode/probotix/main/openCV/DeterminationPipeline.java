@@ -85,6 +85,8 @@ public class DeterminationPipeline extends OpenCvPipeline
             contour.release();
 
         }
+
+
     }
 
     @Override
