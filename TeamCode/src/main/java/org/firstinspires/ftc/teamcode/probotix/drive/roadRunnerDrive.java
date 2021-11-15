@@ -59,7 +59,8 @@ public class roadRunnerDrive extends LinearOpMode {
 
 
         double turnspeed = 0.8;
-        int x = 1;
+        int xl = 1;
+        int xr = 1;
         boolean g2ltPS = false;
 
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -130,30 +131,29 @@ public class roadRunnerDrive extends LinearOpMode {
                         Hardware.getDeliverServo().setPosition(0.14);
                     }
 
-                    if (gamepad2.right_bumper) {
-                        Hardware.getIntakeMotor().setPower(-0.7);
+                    if (gamepad2.right_trigger > 0.1) {
+                        Hardware.getIntakeMotor().setPower(xr * -0.7);
                     } else {
                         Hardware.getIntakeMotor().setPower(0);
                     }
 
-                    if (gamepad2.right_trigger > 0.1) {
-                        Hardware.getIntakeMotor().setPower(0.7);
+                    if (leftBumperClick(gamepad2.left_bumper)) {
+                        xl = xl * -1;
                     }
 
-                    if (leftBumperClick(gamepad2.left_bumper)) {
-                        x = x * -1;
-
+                    if (rightBumperClick(gamepad2.right_bumper)) {
+                        xr = xr * -1;
                     }
 
                     if (gamepad2.left_trigger > 0.2){
-                        Hardware.getCarouselMotor().setPower(x * 0.5);
+                        Hardware.getCarouselMotor().setPower(xl * 0.5);
                     } else {
                         Hardware.getCarouselMotor().setPower(0);
                     }
 
-                    if (x == 1) {
+                    if (xl == 1) {
                         telemetry.addData("CarouselColour","Red");
-                    } else if (x == -1) {
+                    } else if (xl == -1) {
                         telemetry.addData("CarouselColour","Blue");
                     }
 
@@ -162,8 +162,6 @@ public class roadRunnerDrive extends LinearOpMode {
 
                     //servo: start:0.73 mid:0.45 eind:0.12
                     //lift: start:0 eind:-2050
-
-
 
 
                 case AUTOMATIC_CONTROL:
@@ -184,11 +182,19 @@ public class roadRunnerDrive extends LinearOpMode {
         }
     }
 
-    private boolean buttonPreviousState;
+    private boolean leftBumperPreviousState;
     public boolean leftBumperClick (boolean button) {
         boolean returnVal;
-        returnVal = button && !buttonPreviousState;
-        buttonPreviousState = button;
+        returnVal = button && !leftBumperPreviousState;
+        leftBumperPreviousState = button;
+        return returnVal;
+    }
+
+    private boolean rightBumperPreviousState;
+    public boolean rightBumperClick (boolean button) {
+        boolean returnVal;
+        returnVal = button && !rightBumperPreviousState;
+        rightBumperPreviousState = button;
         return returnVal;
     }
 
