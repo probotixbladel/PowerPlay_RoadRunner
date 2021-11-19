@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.probotix.main.SampleMecanumDriveCancelable;
 import org.firstinspires.ftc.teamcode.probotix.main.hardware;
@@ -53,13 +54,15 @@ public class roadRunnerDrive extends LinearOpMode {
         this.Hardware = new hardware(hardwareMap);
         Hardware.init();
         Hardware.setGear(hardware.Gear.FOURTH);
+        Hardware.getWheelLeftFront().setDirection(DcMotorSimple.Direction.REVERSE);
+        Hardware.getWheelLeftRear().setDirection(DcMotorSimple.Direction.REVERSE);
 
 
 
-        double turnspeed = 1.2;
-        int xl = 1;
+        double turnspeed = 0.8;
         int xr = 1;
-        boolean g2ltPS = false;
+        int Idirection = 1;
+        int Cdirection = 1;
 
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -76,7 +79,7 @@ public class roadRunnerDrive extends LinearOpMode {
                     drive.setWeightedDrivePower(
                             new Pose2d(
                                     -gamepad1.left_stick_y * Hardware.getGear().getMaxSpeed(),
-                                    gamepad1.left_stick_x * Hardware.getGear().getMaxSpeed(),
+                                    -gamepad1.left_stick_x * Hardware.getGear().getMaxSpeed(),
                                     -gamepad1.right_stick_x * Hardware.getGear().getMaxSpeed() * turnspeed
                             )
                     );
@@ -104,18 +107,22 @@ public class roadRunnerDrive extends LinearOpMode {
                     if (gamepad2.dpad_down) {
                         Hardware.getLiftMotor().setTargetPosition(0);
                         Hardware.getLiftMotor().setPower(0.4);
+                        xr = 1;
 
                     } else if (gamepad2.dpad_right) {
                         Hardware.getLiftMotor().setTargetPosition(-400);
                         Hardware.getLiftMotor().setPower(0.4);
+                        xr = 0;
 
                     } else if (gamepad2.dpad_left) {
                         Hardware.getLiftMotor().setTargetPosition(-1000);
                         Hardware.getLiftMotor().setPower(0.4);
+                        xr = 0;
 
                     } else if (gamepad2.dpad_up) {
                         Hardware.getLiftMotor().setTargetPosition(-1510);
                         Hardware.getLiftMotor().setPower(0.4);
+                        xr = 0;
 
                     }
 
@@ -129,29 +136,30 @@ public class roadRunnerDrive extends LinearOpMode {
                         Hardware.getDeliverServo().setPosition(0.14);
                     }
 
+                    Hardware.getIntakeMotor().setPower(gamepad2.right_trigger * xr * Idirection);
+
+                    Hardware.getCarouselMotor().setPower(gamepad2.left_trigger * 0.6 * Cdirection );
+
+                    /*
                     if (gamepad2.right_trigger > 0.1) {
                         Hardware.getIntakeMotor().setPower(xr * -0.7);
                     } else {
                         Hardware.getIntakeMotor().setPower(0);
                     }
 
+                     */
+
                     if (leftBumperClick(gamepad2.left_bumper)) {
-                        xl = xl * -1;
+                        Cdirection = Cdirection * -1;
                     }
 
                     if (rightBumperClick(gamepad2.right_bumper)) {
-                        xr = xr * -1;
+                        Idirection = Idirection * -1;
                     }
 
-                    if (gamepad2.left_trigger > 0.2){
-                        Hardware.getCarouselMotor().setPower(xl * 0.5);
-                    } else {
-                        Hardware.getCarouselMotor().setPower(0);
-                    }
-
-                    if (xl == 1) {
+                    if (Cdirection == 1) {
                         telemetry.addData("CarouselColour","Red");
-                    } else if (xl == -1) {
+                    } else if (Cdirection == -1) {
                         telemetry.addData("CarouselColour","Blue");
                     }
 

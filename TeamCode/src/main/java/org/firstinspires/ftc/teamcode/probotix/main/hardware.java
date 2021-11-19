@@ -55,8 +55,9 @@ public class hardware {
 
         //deliverServo.setPosition(0.75);
 
-        wheelLeftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        wheelLeftRear.setDirection(DcMotorSimple.Direction.REVERSE);
+       // wheelLeftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+       // wheelLeftRear.setDirection(DcMotorSimple.Direction.REVERSE);
+
     }
 
     public void setGear(Gear gear) {
