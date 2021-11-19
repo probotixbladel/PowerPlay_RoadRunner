@@ -19,21 +19,21 @@ public class autohelper {
         this.opMode = opMode;
     }
 
-    //this method drives encoded and waits for it to finish, or reach it's timeout time
-    //The parameters are the distance it needs to drive in X Y and Z, the time it needs to take (faster slower etc) and the time before the code continues anyways
-    //linearX is distance forward/backward
-    //linearY is sideways
+    //this method drives encoded and waits for it to finish, or reach it's timeout time (IN SECONDS)
+    //The parameters are the distance it needs to drive in X Y and Z, the time it needs to take (faster slower etc IN SECONDS) and the time before the code continues anyways
+    //linearX is distance forward/backward IN MILLIMETERS
+    //linearY is sideways IN MILLIMETERS
     //angularZ is the rotation
 
     //Je maakt hier een public void aan die je kan aanroepen in een autonome periode zodat je deze berekening niet 100 keer opnieuw
     //in hoeft te voeren maar alleen deze handige class nodig hebt en je de code zo clean mogelijk houdt.
-    public void driveAndWait(double linearXCM, double linearYCM, double angularZDEG, double timeMS, double timeoutMS) {
-        driveEncoded(linearXCM, linearYCM, angularZDEG, timeMS);
+    public void driveAndWait(double linearXmm, double linearYmm, double angularZDEG, double timeS, double timeoutS) {
+        driveEncoded(linearXmm, linearYmm, angularZDEG, timeS);
         ElapsedTime runtime = new ElapsedTime();
         runtime.reset();
 
         //zorgt ervoor dat de robot pas doorgaat met de code als het vorige stukje is afgewerkt oftwel de robot stil staat
-        while (opMode.opModeIsActive() && runtime.milliseconds() < timeoutMS * 1000 && Hardware.getWheelLeftFront().isBusy() &&
+        while (opMode.opModeIsActive() && runtime.milliseconds() < timeoutS * 1000 && Hardware.getWheelLeftFront().isBusy() &&
                 Hardware.getWheelRightFront().isBusy() && Hardware.getWheelLeftRear().isBusy() &&
                 Hardware.getWheelRightRear().isBusy()) {
         }
@@ -82,6 +82,7 @@ public class autohelper {
         Hardware.getWheelRightFront().setPower(rpmFR / maxRpm);
         Hardware.getWheelLeftRear().setPower(rpmRL / maxRpm);
         Hardware.getWheelRightRear().setPower(rpmRR / maxRpm);
+        //public double Pwr = rpmFL/maxRpm;
     }
 
     //Voegt het aantal ticks aan het huidige aantal ticks toe zodat de wielen door blijven draaien. Want de wielen onthouden hoever de gedraaid hebben.

@@ -13,7 +13,7 @@ public enum hardwareVariable {
 
     //Hier moet je de verschillende waardes van de robot invoeren die de berekening die autohelper nodig heeft om
     //de autonoom met encoders goed uit te voeren. (de 3 lengtes zij in milimeters)
-    FREIGHTFRENZY_ROBOT(100, 370, 268, 1, 537.6, 312.5);
+    FREIGHTFRENZY_ROBOT(100, 230, 272, 1, 537.6, 312.5);
 
     private double wheelDiameter;
     private double wheelSeperationWidth;

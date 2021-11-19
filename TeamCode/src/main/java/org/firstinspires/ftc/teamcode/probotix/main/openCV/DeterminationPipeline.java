@@ -112,12 +112,16 @@ public class DeterminationPipeline extends OpenCvPipeline
     // determine the postion of the marker (duck or team shipping element)
     public MarkerPosition getAnalysis()
     {
-        if (getLocation() > treshold){
-            position = MarkerPosition.RIGHT;
-        } else if(getLocation() <= treshold){
+        if (getLocation() < treshold){
+            position = MarkerPosition.LEFT;
+        } else if(getLocation() >= treshold){
             position = MarkerPosition.CENTER;
+        } else if(getLocation() < 50){
+            position = MarkerPosition.RIGHT;  // ?? only two locations visible? Default position is LEFT.
+        } else if(getLocation() > 1000) {
+            position = MarkerPosition.RIGHT;
         } else {
-            position = MarkerPosition.LEFT;  // ?? only two locations visible? Default position is LEFT.
+            position = MarkerPosition.RIGHT;
         }
 
         return position;

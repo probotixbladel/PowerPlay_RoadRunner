@@ -51,14 +51,12 @@ public class roadRunnerDrive extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         SampleMecanumDriveCancelable drive = new SampleMecanumDriveCancelable(hardwareMap);
         this.Hardware = new hardware(hardwareMap);
-
         Hardware.init();
-
         Hardware.setGear(hardware.Gear.FOURTH);
 
 
 
-        double turnspeed = 0.8;
+        double turnspeed = 1.2;
         int xl = 1;
         int xr = 1;
         boolean g2ltPS = false;
@@ -78,14 +76,14 @@ public class roadRunnerDrive extends LinearOpMode {
                     drive.setWeightedDrivePower(
                             new Pose2d(
                                     -gamepad1.left_stick_y * Hardware.getGear().getMaxSpeed(),
-                                    -gamepad1.left_stick_x * Hardware.getGear().getMaxSpeed(),
+                                    gamepad1.left_stick_x * Hardware.getGear().getMaxSpeed(),
                                     -gamepad1.right_stick_x * Hardware.getGear().getMaxSpeed() * turnspeed
                             )
                     );
 
 
                     if (Hardware.getGear() == null) {
-                        Hardware.setGear(hardware.Gear.SECOND);
+                        Hardware.setGear(773.367563328972423.36756332897242hardware.Gear.SECOND);
                     }
 
                     if (gamepad1.a) {
@@ -108,7 +106,7 @@ public class roadRunnerDrive extends LinearOpMode {
                         Hardware.getLiftMotor().setPower(0.4);
 
                     } else if (gamepad2.dpad_right) {
-                        Hardware.getLiftMotor().setTargetPosition(-470);
+                        Hardware.getLiftMotor().setTargetPosition(-400);
                         Hardware.getLiftMotor().setPower(0.4);
 
                     } else if (gamepad2.dpad_left) {

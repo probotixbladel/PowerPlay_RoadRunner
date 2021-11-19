@@ -60,6 +60,7 @@ public class autoENCODERS extends LinearOpMode {
         while (!opModeIsActive()){
             telemetry.addData("Status", "Initialized");
             telemetry.addData("location", pipeline.getLocation());
+            //telemetry.addData("test", "test");
             telemetry.update();
             //dashboardTelemetry.addData("location", pipeline.getLocation());
             //dashboardTelemetry.update();
@@ -71,6 +72,9 @@ public class autoENCODERS extends LinearOpMode {
 
         if(opModeIsActive()) {
 
+            //telemetry.addData("idk", "idk");
+            //telemetry.update();
+
             Autohelper.addWheelTicks(0, 0, 0, 0);
 
             Hardware.getWheelLeftFront().setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
@@ -78,33 +82,14 @@ public class autoENCODERS extends LinearOpMode {
             Hardware.getWheelLeftRear().setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             Hardware.getWheelRightRear().setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
 
+            Hardware.getDeliverServo().setPosition(0.45);
+            //Hardware.getLiftMotor().setTargetPosition(0);
+
             //Drive to shipping hub
-            Autohelper.driveAndWait(60, 60, 0, 5000, 5100);
-            if (pipeline.getAnalysis()==LEFT) {
-                //Use position of Team Element to control the lift (bakje moet 0,86 voor de servo zijn)
+            Autohelper.driveAndWait(0, 500, 0, 2, 2.5);
 
-                Hardware.getLiftMotor().setTargetPosition(-470);
-            }
-            else if (pipeline.getAnalysis()==CENTER){
-                Hardware.getLiftMotor().setTargetPosition(-1000);
-            }
-            else if (pipeline.getAnalysis()==RIGHT){
-                Hardware.getLiftMotor().setTargetPosition(-1510);
-            }
-            Hardware.getLiftMotor().setPower(0.4);
-            Hardware.getDeliverServo().setPosition(0.16);
+            //sleep(1000);
 
-            Hardware.getIntakeMotor().setPower(0.5);
-
-            Hardware.getIntakeMotor().setPower(0);
-
-            //drive to the carousel
-            Autohelper.driveAndWait(0,0,0,0,0);
-            //turn the carouselmotor
-
-            //drive to storage unit
-            Autohelper.driveAndWait(0,0,0,0,0);
-            //done
 
         }
 

@@ -49,10 +49,11 @@ public class hardware {
 
         liftMotor.setPower(0);
         liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        liftMotor.setTargetPosition(0);
         liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
-        deliverServo.setPosition(0.75);
+        //deliverServo.setPosition(0.75);
 
         wheelLeftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         wheelLeftRear.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -66,7 +67,7 @@ public class hardware {
         return this.gear;
     }
 
-    public enum Gear {
+    public enum  Gear {
         FIRST(0.25), SECOND(0.5), THIRD(0.75), FOURTH(1.0);
 
         private double MaxSpeed;
