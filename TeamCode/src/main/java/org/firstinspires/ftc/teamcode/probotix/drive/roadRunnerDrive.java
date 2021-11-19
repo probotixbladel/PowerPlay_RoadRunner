@@ -83,7 +83,7 @@ public class roadRunnerDrive extends LinearOpMode {
 
 
                     if (Hardware.getGear() == null) {
-                        Hardware.setGear(773.367563328972423.36756332897242hardware.Gear.SECOND);
+                        Hardware.setGear(hardware.Gear.SECOND);
                     }
 
                     if (gamepad1.a) {
