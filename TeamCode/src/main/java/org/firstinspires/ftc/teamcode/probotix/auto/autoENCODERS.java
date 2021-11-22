@@ -33,8 +33,8 @@ public class autoENCODERS extends LinearOpMode {
 
     private hardware Hardware;
     private autohelper Autohelper;
-    OpenCvCamera webcam;
-    DeterminationPipeline pipeline = new DeterminationPipeline();
+    //OpenCvCamera webcam;
+    //eterminationPipeline pipeline = new DeterminationPipeline();
 
     public double positionlf;
     public double positionrf;
@@ -49,6 +49,8 @@ public class autoENCODERS extends LinearOpMode {
 
         Hardware.init();
  // This code is from webcamexample
+
+        /*
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"),cameraMonitorViewId);
         webcam.setPipeline(pipeline);
@@ -63,17 +65,23 @@ public class autoENCODERS extends LinearOpMode {
             public void onError(int errorCode){}
         });
 
+         */
 
 
 
-        while (!opModeIsActive()){
+
+       /* while (!opModeIsActive()){
             telemetry.addData("Status", "Initialized");
-            telemetry.addData("location", pipeline.getLocation());
+            //telemetry.addData("location", pipeline.getLocation());
             //telemetry.addData("test", "test");
             telemetry.update();
             //dashboardTelemetry.addData("location", pipeline.getLocation());
             //dashboardTelemetry.update();
         }
+
+        */
+
+        telemetry.addData("Status", "Initialized");
 
 
 //Until here
@@ -123,9 +131,12 @@ public class autoENCODERS extends LinearOpMode {
             sleep(2300);
 
             Autohelper.driveAndWait(0,100,0,1,1.5);
+            Hardware.getCarouselMotor().setPower(0);
             Autohelper.driveAndWait(-100,0,0,1,1.5);
             Autohelper.driveAndWait(200,0,0,2,2.5);
 
+
+            /*
             //Autohelper.driveAndWait(100,0,0,1,1.5);
             Autohelper.driveAndWait(0,1250,0,9,9.5);
 
@@ -161,6 +172,8 @@ public class autoENCODERS extends LinearOpMode {
             Hardware.getDeliverServo().setPosition(0.75);
 
             sleep(3000);
+
+             */
 
 
 

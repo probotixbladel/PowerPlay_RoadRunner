@@ -48,10 +48,10 @@ public class autoBlueLeft extends LinearOpMode {
 
             //telemetry.addData("idk", "idk");
             //telemetry.update();
-            Hardware.getWheelLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            Hardware.getWheelLeftRear().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            Hardware.getWheelRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            Hardware.getWheelRightRear().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //Hardware.getWheelLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //Hardware.getWheelLeftRear().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //Hardware.getWheelRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //Hardware.getWheelRightRear().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             Hardware.getWheelLeftFront().setDirection(DcMotorSimple.Direction.REVERSE);
             Hardware.getWheelLeftRear().setDirection(DcMotorSimple.Direction.REVERSE);
@@ -63,10 +63,10 @@ public class autoBlueLeft extends LinearOpMode {
 
 
 
-            Hardware.getWheelLeftFront().setTargetPosition(0);
-            Hardware.getWheelRightFront().setTargetPosition(0);
-            Hardware.getWheelLeftRear().setTargetPosition(0);
-            Hardware.getWheelRightRear().setTargetPosition(0);
+            //Hardware.getWheelLeftFront().setTargetPosition(0);
+            //Hardware.getWheelRightFront().setTargetPosition(0);
+            //Hardware.getWheelLeftRear().setTargetPosition(0);
+            //Hardware.getWheelRightRear().setTargetPosition(0);
 
             Autohelper.addWheelTicks(0, 0, 0, 0);
 
@@ -78,7 +78,7 @@ public class autoBlueLeft extends LinearOpMode {
             Hardware.getDeliverServo().setPosition(0.45);
             //Hardware.getLiftMotor().setTargetPosition(0);
 
-            //Drive to shipping hub
+            //Dr ive to shipping hub
             Autohelper.driveAndWait(-600, 0, 0, 3, 3.5);
 
         }

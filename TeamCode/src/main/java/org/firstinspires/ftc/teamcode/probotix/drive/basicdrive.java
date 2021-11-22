@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.probotix.drive;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.probotix.main.hardware;
 
+@Disabled
 @TeleOp(name="basicdrive", group="Drive")
 public class basicdrive extends OpMode {
 

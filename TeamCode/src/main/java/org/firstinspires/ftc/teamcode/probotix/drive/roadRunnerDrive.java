@@ -60,7 +60,8 @@ public class roadRunnerDrive extends LinearOpMode {
 
 
         double turnspeed = 0.8;
-        int xr = 1;
+        int xm = 1;
+        int xs = 1;
         int Idirection = 1;
         int Cdirection = 1;
 
@@ -107,36 +108,45 @@ public class roadRunnerDrive extends LinearOpMode {
                     if (gamepad2.dpad_down) {
                         Hardware.getLiftMotor().setTargetPosition(0);
                         Hardware.getLiftMotor().setPower(0.4);
-                        xr = 1;
+
 
                     } else if (gamepad2.dpad_right) {
-                        Hardware.getLiftMotor().setTargetPosition(-400);
+                        Hardware.getLiftMotor().setTargetPosition(-500);
                         Hardware.getLiftMotor().setPower(0.4);
-                        xr = 0;
+
 
                     } else if (gamepad2.dpad_left) {
                         Hardware.getLiftMotor().setTargetPosition(-1000);
                         Hardware.getLiftMotor().setPower(0.4);
-                        xr = 0;
+
 
                     } else if (gamepad2.dpad_up) {
                         Hardware.getLiftMotor().setTargetPosition(-1510);
                         Hardware.getLiftMotor().setPower(0.4);
-                        xr = 0;
 
+
+                    }
+
+                    if  (Hardware.getLiftMotor().getCurrentPosition() > -10) {
+                        xm = 1;
+                    } else {
+                        xm = 0;
                     }
 
 
                     //servo: start:0.73 mid:0.45 eind:0.15
                     if (gamepad2.a) {
                         Hardware.getDeliverServo().setPosition(0.75);
+                        xs = 1;
                     } else if (gamepad2.b) {
                         Hardware.getDeliverServo().setPosition(0.45);
+                        xs = 0;
                     } else if (gamepad2.y) {
-                        Hardware.getDeliverServo().setPosition(0.14);
+                        Hardware.getDeliverServo().setPosition(0.10);
+                        xs = 0;
                     }
 
-                    Hardware.getIntakeMotor().setPower(gamepad2.right_trigger * xr * Idirection);
+                    Hardware.getIntakeMotor().setPower(gamepad2.right_trigger * xm * xs * Idirection);
 
                     Hardware.getCarouselMotor().setPower(gamepad2.left_trigger * 0.6 * Cdirection );
 
