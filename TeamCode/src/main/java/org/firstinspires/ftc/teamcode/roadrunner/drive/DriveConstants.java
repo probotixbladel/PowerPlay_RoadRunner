@@ -33,7 +33,7 @@ public class DriveConstants {
      */
     public static final boolean RUN_USING_ENCODER = true;
     public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0,
-            73.36756332897242);
+            MAX_RPM / 60 * TICKS_PER_REV);
 
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -43,7 +43,7 @@ public class DriveConstants {
      * angular distances although most angular parameters are wrapped in Math.toRadians() for
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
-    public static double WHEEL_RADIUS = 2; // in
+    public static double WHEEL_RADIUS = 1.9685; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
     public static double TRACK_WIDTH = 9; // in
 
@@ -85,10 +85,10 @@ public class DriveConstants {
      * You are free to raise this on your own if you would like. It is best determined through experimentation.
 
      */
-    public static double MAX_VEL = 10;
-    public static double MAX_ACCEL = 55.63236990731925;
-    public static double MAX_ANG_VEL = Math.toRadians(354.16666666666663);
-    public static double MAX_ANG_ACCEL = Math.toRadians(354.16666666666663);
+    public static double MAX_VEL = 6;
+    public static double MAX_ACCEL = 6;
+    public static double MAX_ANG_VEL = Math.toRadians(57.805072568544325);
+    public static double MAX_ANG_ACCEL = Math.toRadians(57.805072568544325);
 
 
     public static double encoderTicksToInches(double ticks) {
