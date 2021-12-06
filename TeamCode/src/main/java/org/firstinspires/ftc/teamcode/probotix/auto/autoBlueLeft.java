@@ -21,7 +21,7 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 @Config
-@Autonomous(name="InstantPark", group="Linear Opmode")
+@Autonomous(name="autoBlueLeft", group="Linear Opmode")
 
 public class autoBlueLeft extends LinearOpMode {
 
@@ -79,7 +79,9 @@ public class autoBlueLeft extends LinearOpMode {
             //Hardware.getLiftMotor().setTargetPosition(0);
 
             //Dr ive to shipping hub
-            Autohelper.driveAndWait(-600, 0, 0, 3, 3.5);
+            Autohelper.driveAndWait(600.0,0.0, 0.0, 1.5, 1.7);
+            Autohelper.driveAndWait(0.0,0.0, -45.0, 0.5, 0.7);
+            Autohelper.driveAndWait(-600.0,00.0, 0.0, 1.5, 1.7);
 
         }
 

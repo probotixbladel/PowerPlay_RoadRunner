@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive;
 @Config
 @Autonomous(group = "drive")
 public class StraightTest extends LinearOpMode {
-    public static double DISTANCE = 60; // in
+    public static double DISTANCE = 60; // inch
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -42,6 +42,8 @@ public class StraightTest extends LinearOpMode {
         telemetry.addData("finalHeading", poseEstimate.getHeading());
         telemetry.update();
 
-        while (!isStopRequested() && opModeIsActive()) ;
+        while (!isStopRequested() && opModeIsActive()) {
+            //do your thang
+        }
     }
 }
