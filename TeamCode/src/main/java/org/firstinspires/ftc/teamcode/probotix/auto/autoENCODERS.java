@@ -149,16 +149,12 @@ public class autoENCODERS extends LinearOpMode {
             if (pipeline.getAnalysis() == LEFT) {
                 Hardware.getLiftMotor().setTargetPosition(-1510);
                 Hardware.getLiftMotor().setPower(0.6);
-
             } else if (pipeline.getAnalysis() == CENTER) {
                 Hardware.getLiftMotor().setTargetPosition(-1000);
                 Hardware.getLiftMotor().setPower(0.6);
-
             } else if (pipeline.getAnalysis() == RIGHT) {
                 Hardware.getLiftMotor().setTargetPosition(-400);
                 Hardware.getLiftMotor().setPower(0.6);
-
-
             }
 
             Autohelper.driveAndWait(250,0,0,2,2.5);
