@@ -110,6 +110,7 @@ public class DeterminationPipeline extends OpenCvPipeline
     
     
     // determine the postion of the marker (duck or team shipping element)
+    //tresholod = 500
     public MarkerPosition getAnalysis()
     {
         if (getLocation() < treshold){

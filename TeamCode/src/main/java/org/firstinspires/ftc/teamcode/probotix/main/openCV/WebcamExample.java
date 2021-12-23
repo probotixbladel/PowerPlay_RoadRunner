@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.probotix.main.openCV;
 
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -19,7 +20,7 @@ For more background information see: Github.com/OpenFTC/EasyOpenCV/blob/master/d
   !! Strongly recommended to read these docs first!!
 */
 
-@Disabled
+@Config
 @Autonomous
 public class  WebcamExample extends LinearOpMode
 {
