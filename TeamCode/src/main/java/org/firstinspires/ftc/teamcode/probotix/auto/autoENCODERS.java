@@ -27,7 +27,7 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-
+@Disabled
 @Config
 @Autonomous(name="BlueRightOP", group="Linear Opmode")
 

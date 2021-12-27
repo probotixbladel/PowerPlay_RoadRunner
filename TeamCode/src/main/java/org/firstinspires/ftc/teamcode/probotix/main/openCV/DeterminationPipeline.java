@@ -113,13 +113,13 @@ public class DeterminationPipeline extends OpenCvPipeline
     //tresholod = 500
     public MarkerPosition getAnalysis()
     {
-        if (getLocation() < treshold){
+        if (getLocation() < treshold && getLocation() > 50){
             position = MarkerPosition.LEFT;
-        } else if(getLocation() >= treshold){
+        } else if(getLocation() >= treshold && getLocation() < 1000){
             position = MarkerPosition.CENTER;
-        } else if(getLocation() < 50){
+        } else if(getLocation() <= 50){
             position = MarkerPosition.RIGHT;  // ?? only two locations visible? Default position is LEFT.
-        } else if(getLocation() > 1000) {
+        } else if(getLocation() >= 1000) {
             position = MarkerPosition.RIGHT;
         } else {
             position = MarkerPosition.RIGHT;

@@ -20,9 +20,9 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 
-@Autonomous(name="BlueLeft", group="probotix")
+@Autonomous(name="BlueRightnomate", group="probotix")
 
-public class BlueLeft extends LinearOpMode {
+public class BlueRightnomate extends LinearOpMode {
 
     private hardware Hardware;
     private int HubPos=-400;
@@ -48,40 +48,15 @@ public class BlueLeft extends LinearOpMode {
 
 
         TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
-              .lineToLinearHeading(new Pose2d(25, -30, Math.toRadians(0)))
-                .addDisplacementMarker(5,()-> {
-                    Hardware.getLiftMotor().setTargetPosition(HubPos);
-                    Hardware.getLiftMotor().setPower(0.5);
-                })
+              .lineToLinearHeading(new Pose2d(5, -30, Math.toRadians(0)))
               .build();
 
-        TrajectorySequence trajSeq2 = drive.trajectorySequenceBuilder(trajSeq.end())
-                .lineToLinearHeading(new Pose2d(-2, 0, Math.toRadians(-90)))
-                .addDisplacementMarker(20,()-> {
-                    Hardware.getDeliverServo().setPosition(0.75);
-                    Hardware.getLiftMotor().setTargetPosition(0);
-                    Hardware.getLiftMotor().setPower(0.5);
-                })
-                .build();
-
-        TrajectorySequence trajSeq3 = drive.trajectorySequenceBuilder(trajSeq2.end())
-                .lineToLinearHeading(new Pose2d(-2, 30, Math.toRadians(-90)))
-
-                .build();
-
-        TrajectorySequence trajSeq4 = drive.trajectorySequenceBuilder(trajSeq3.end())
-                .lineToLinearHeading(new Pose2d(-2, 20, Math.toRadians(-90)))
-
-                .build();
-
-        TrajectorySequence trajSeq5 = drive.trajectorySequenceBuilder(trajSeq4.end())
-                .lineToLinearHeading(new Pose2d(-2, 0, Math.toRadians(-90)))
-
+        TrajectorySequence trajSeqHub1 = drive.trajectorySequenceBuilder(trajSeq.end())
+                .lineToLinearHeading(new Pose2d(40, -30, Math.toRadians(0)))
                 .build();
 
 
 
-        /*
         TrajectorySequence trajSeqHub2 = drive.trajectorySequenceBuilder(trajSeqHub1.end())
              .lineToLinearHeading(new Pose2d(40,6,Math.toRadians(90)))
              .addDisplacementMarker(5,()-> {
@@ -99,9 +74,21 @@ public class BlueLeft extends LinearOpMode {
                 })
                 .build();
 
-         */
+        TrajectorySequence trajSeqPark2 = drive.trajectorySequenceBuilder(trajSeqPark1.end())
+                .lineToLinearHeading(new Pose2d(15, -30, Math.toRadians(-90)))
+                .build();
 
+        TrajectorySequence trajSeqPark3 = drive.trajectorySequenceBuilder(trajSeqPark2.end())
+                .lineToLinearHeading(new Pose2d(15, 40, Math.toRadians(-90)))
+                .build();
 
+        TrajectorySequence trajSeqPark4 = drive.trajectorySequenceBuilder(trajSeqPark3.end())
+                .lineToLinearHeading(new Pose2d(-4, 40, Math.toRadians(-90)))
+                .build();
+
+        TrajectorySequence trajSeqPark5 = drive.trajectorySequenceBuilder(trajSeqPark4.end())
+                .lineToLinearHeading(new Pose2d(-4, 70, Math.toRadians(-90)))
+                .build();
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"),cameraMonitorViewId);
@@ -123,7 +110,6 @@ public class BlueLeft extends LinearOpMode {
 
         while (!opModeIsActive()){
             telemetry.addData("location", pipeline.getLocation());
-            telemetry.addLine("Init Ready!");
             telemetry.update();
              dashboardTelemetry.addData("location", pipeline.getLocation());
             dashboardTelemetry.update();
@@ -132,7 +118,7 @@ public class BlueLeft extends LinearOpMode {
             } else if (pipeline.getAnalysis() == CENTER) {
                 HubPos = -1000;
             } else if (pipeline.getAnalysis() == RIGHT) {
-                HubPos = -1570;
+                HubPos = -1510;
             }
         }
 
@@ -143,23 +129,19 @@ public class BlueLeft extends LinearOpMode {
 
 
             drive.followTrajectorySequence(trajSeq);
-
-
-
+            Hardware.getCarouselMotor().setPower(-0.45);
+            sleep(2000);
+            Hardware.getCarouselMotor().setPower(0);
+            drive.followTrajectorySequence(trajSeqHub1);
+            drive.followTrajectorySequence(trajSeqHub2);
             //Input code to release preloaded freight
             Hardware.getDeliverServo().setPosition(0.10);
             sleep(1000);
-            drive.followTrajectorySequence(trajSeq2);
-            drive.followTrajectorySequence(trajSeq3);
-            sleep(500);
-            //try intake
-            //drive.followTrajectorySequence(trajSeq4);
-            //drive.followTrajectorySequence(trajSeq5);
-
-
-
-
-
+            drive.followTrajectorySequence(trajSeqPark1);
+            drive.followTrajectorySequence(trajSeqPark2);
+            drive.followTrajectorySequence(trajSeqPark3);
+            drive.followTrajectorySequence(trajSeqPark4);
+            drive.followTrajectorySequence(trajSeqPark5);
         }
 }
 
