@@ -42,15 +42,15 @@ public class RedLeft extends LinearOpMode {
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(5, 25, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(5, 26, Math.toRadians(-90)))
                 .build();
 
         TrajectorySequence trajSeqHub1 = drive.trajectorySequenceBuilder(trajSeq.end())
-                .lineToLinearHeading(new Pose2d(40, 25, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(42, 25, Math.toRadians(-90)))
                 .build();
-
+//Following testing @ForceFusion changed x from 40 to 42 and y -9 to -2
         TrajectorySequence trajSeqHub2 = drive.trajectorySequenceBuilder(trajSeqHub1.end())
-                .lineToLinearHeading(new Pose2d(40,-9,Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(44,-2,Math.toRadians(-90)))
                 .addDisplacementMarker(5,()-> {
                     Hardware.getLiftMotor().setTargetPosition(HubPos);
                     Hardware.getLiftMotor().setPower(0.5);

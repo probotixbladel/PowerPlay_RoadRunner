@@ -136,7 +136,7 @@ public class roadRunnerDrive extends LinearOpMode {
 
                     //servo: start:0.73 mid:0.45 eind:0.15
                     if (gamepad2.a) {
-                        Hardware.getDeliverServo().setPosition(0.75);
+                        Hardware.getDeliverServo().setPosition(0.73);
                         xs = 1;
                     } else if (gamepad2.b) {
                         Hardware.getDeliverServo().setPosition(0.45);
