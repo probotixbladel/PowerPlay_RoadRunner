@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.probotix.main;
 
 import static org.firstinspires.ftc.teamcode.roadrunner.drive.DriveConstants.MOTOR_VELO_PID;
+import static org.firstinspires.ftc.teamcode.roadrunner.drive.DriveConstants.RUN_USING_ENCODER;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -16,15 +17,24 @@ import org.firstinspires.ftc.teamcode.probotix.main.enums.hardwareVariable;
 @Autonomous(name="CarousselPID", group="Linear Opmode")
 public class CarousselPID extends LinearOpMode {
 
-    public static PIDFCoefficients CAROUSSELPID = new PIDFCoefficients(0, 0, 0,
-            0);
+  /*  public static PIDFCoefficients CAROUSSELPID = new PIDFCoefficients(0, 0, 0,
+            0);*/
+
+    public static int P = 0;
+    public static int I = 0;
+    public static int D = 0;
+    public static int F = 0;
+
 
     private hardware Hardware;
 
-    public static int speed = 0;
+    public static double speed = 0;
+
+    public static int upperspeed = 4000;
+    public static int lowerspeed = 0;
 
     public double velocity;
-    public static double finalVelocity;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -32,7 +42,12 @@ public class CarousselPID extends LinearOpMode {
 
         Hardware.init();
 
-        Hardware.getCarouselMotor().setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, CAROUSSELPID);
+        Hardware.getCarouselMotor().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Hardware.getCarouselMotor().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Hardware.getCarouselMotor().setVelocityPIDFCoefficients(P,I,D,F);
+       
+
+        //Hardware.getCarouselMotor().setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, CAROUSSELPID);
 
         FtcDashboard dashboard = FtcDashboard.getInstance();
         Telemetry dashboardTelemetry = dashboard.getTelemetry();
@@ -40,13 +55,22 @@ public class CarousselPID extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
+        waitForStart();
+
         while(opModeIsActive()){
 
-            Hardware.getCarouselMotor().setVelocity(speed);
+            Hardware.getCarouselMotor().setPower(speed);
 
             velocity = Hardware.getCarouselMotor().getVelocity();
 
             dashboardTelemetry.addData("velocity", velocity);
+            dashboardTelemetry.addData("speed", speed);
+            dashboardTelemetry.addData("upper", upperspeed);
+            dashboardTelemetry.addData("lower", lowerspeed);
+
+            telemetry.addData("velocity", velocity);
+            telemetry.update();
+            dashboardTelemetry.update();
 
 
 
