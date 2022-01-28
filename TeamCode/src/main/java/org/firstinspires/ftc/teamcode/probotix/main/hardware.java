@@ -52,6 +52,10 @@ public class hardware {
         liftMotor.setTargetPosition(0);
         liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        carouselMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        carouselMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
 
         //deliverServo.setPosition(0.75);
 

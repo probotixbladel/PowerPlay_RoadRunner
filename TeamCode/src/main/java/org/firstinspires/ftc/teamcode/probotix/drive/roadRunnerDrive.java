@@ -4,7 +4,11 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
+import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
 import org.firstinspires.ftc.teamcode.probotix.main.SampleMecanumDriveCancelable;
 import org.firstinspires.ftc.teamcode.probotix.main.hardware;
@@ -39,6 +43,11 @@ import org.firstinspires.ftc.teamcode.probotix.main.hardware;
 public class roadRunnerDrive extends LinearOpMode {
     private hardware Hardware;
 
+    private VoltageSensor batteryVoltageSensor;
+    public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(1, 0.8, 1, 2);
+
+
+
 
     // Define 2 states, drive control or automatic control
     enum Mode {
@@ -52,10 +61,23 @@ public class roadRunnerDrive extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         SampleMecanumDriveCancelable drive = new SampleMecanumDriveCancelable(hardwareMap);
         this.Hardware = new hardware(hardwareMap);
+
         Hardware.init();
+        Hardware.reset();
         Hardware.setGear(hardware.Gear.FOURTH);
         Hardware.getWheelLeftFront().setDirection(DcMotorSimple.Direction.REVERSE);
         Hardware.getWheelLeftRear().setDirection(DcMotorSimple.Direction.REVERSE);
+
+        MotorConfigurationType motorConfigurationType = Hardware.getCarouselMotor().getMotorType().clone();
+        motorConfigurationType.setAchieveableMaxRPMFraction(1.0);
+        Hardware.getCarouselMotor().setMotorType(motorConfigurationType);
+
+        Hardware.getCarouselMotor().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        batteryVoltageSensor = hardwareMap.voltageSensor.iterator().next();
+        setPIDFCoefficients(Hardware.getCarouselMotor(), MOTOR_VELO_PID);
+
+
 
 
 
@@ -212,6 +234,12 @@ public class roadRunnerDrive extends LinearOpMode {
         returnVal = button && !rightBumperPreviousState;
         rightBumperPreviousState = button;
         return returnVal;
+    }
+
+    private void setPIDFCoefficients(DcMotorEx motor, PIDFCoefficients coefficients) {
+        motor.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(
+                coefficients.p, coefficients.i, coefficients.d, coefficients.f * 12 / batteryVoltageSensor.getVoltage()
+        ));
     }
 
 }
