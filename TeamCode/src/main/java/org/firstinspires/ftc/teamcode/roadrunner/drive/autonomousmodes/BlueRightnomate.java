@@ -68,7 +68,7 @@ public class BlueRightnomate extends LinearOpMode {
         TrajectorySequence trajSeqPark1 = drive.trajectorySequenceBuilder(trajSeqHub2.end())
                 .lineToLinearHeading(new Pose2d(45,-28,Math.toRadians(0)))
                 .addDisplacementMarker(20,()-> {
-                    Hardware.getDeliverServo().setPosition(0.35);
+                    Hardware.getDeliverServo().setPosition(0.61);
                     Hardware.getLiftMotor().setTargetPosition(0);
                     Hardware.getLiftMotor().setPower(0.5);
                 })
@@ -130,7 +130,7 @@ public class BlueRightnomate extends LinearOpMode {
 
             drive.followTrajectorySequence(trajSeq);
             Hardware.getCarouselMotor().setPower(-0.45);
-            sleep(2000);
+            sleep(2200);
             Hardware.getCarouselMotor().setPower(0);
             drive.followTrajectorySequence(trajSeqHub1);
             drive.followTrajectorySequence(trajSeqHub2);
