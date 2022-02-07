@@ -36,7 +36,7 @@ public class BlueRightnomate extends LinearOpMode {
         this.Hardware = new hardware(hardwareMap);
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Hardware.getDeliverServo().setPosition(0.45);
+        Hardware.getDeliverServo().setPosition(0.35);
 
         Pose2d startPose = new Pose2d(0, 0, 0);
         drive.setPoseEstimate(startPose);
@@ -68,7 +68,7 @@ public class BlueRightnomate extends LinearOpMode {
         TrajectorySequence trajSeqPark1 = drive.trajectorySequenceBuilder(trajSeqHub2.end())
                 .lineToLinearHeading(new Pose2d(45,-28,Math.toRadians(0)))
                 .addDisplacementMarker(20,()-> {
-                    Hardware.getDeliverServo().setPosition(0.75);
+                    Hardware.getDeliverServo().setPosition(0.35);
                     Hardware.getLiftMotor().setTargetPosition(0);
                     Hardware.getLiftMotor().setPower(0.5);
                 })
@@ -135,7 +135,7 @@ public class BlueRightnomate extends LinearOpMode {
             drive.followTrajectorySequence(trajSeqHub1);
             drive.followTrajectorySequence(trajSeqHub2);
             //Input code to release preloaded freight
-            Hardware.getDeliverServo().setPosition(0.10);
+            Hardware.getDeliverServo().setPosition(0);
             sleep(1000);
             drive.followTrajectorySequence(trajSeqPark1);
             drive.followTrajectorySequence(trajSeqPark2);

@@ -71,9 +71,7 @@ public class roadRunnerDrive extends LinearOpMode {
         MotorConfigurationType motorConfigurationType = Hardware.getCarouselMotor().getMotorType().clone();
         motorConfigurationType.setAchieveableMaxRPMFraction(1.0);
         Hardware.getCarouselMotor().setMotorType(motorConfigurationType);
-
         Hardware.getCarouselMotor().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
         batteryVoltageSensor = hardwareMap.voltageSensor.iterator().next();
         setPIDFCoefficients(Hardware.getCarouselMotor(), MOTOR_VELO_PID);
 
@@ -156,20 +154,23 @@ public class roadRunnerDrive extends LinearOpMode {
                     }
 
 
-                    //servo: start:0.73 mid:0.45 eind:0.15
+                    //servo: start:0.61 mid:0.35 eind:0
                     if (gamepad2.a) {
-                        Hardware.getDeliverServo().setPosition(0.73);
+                        Hardware.getDeliverServo().setPosition(0.61);
                         xs = 1;
                     } else if (gamepad2.b) {
-                        Hardware.getDeliverServo().setPosition(0.45);
+                        Hardware.getDeliverServo().setPosition(0.35);
                         xs = 0;
                     } else if (gamepad2.y) {
-                        Hardware.getDeliverServo().setPosition(0.10);
+                        Hardware.getDeliverServo().setPosition(0);
                         xs = 0;
                     }
 
                     Hardware.getIntakeMotor().setPower(gamepad2.right_trigger * xm * xs * Idirection);
 
+                    if(gamepad2.left_trigger > 0.1){
+
+                    }
                     Hardware.getCarouselMotor().setPower(gamepad2.left_trigger * 0.6 * Cdirection );
 
                     /*
@@ -242,4 +243,10 @@ public class roadRunnerDrive extends LinearOpMode {
         ));
     }
 
+
+    class carousselAuto extends Thread {
+
+
+
+    }
 }
