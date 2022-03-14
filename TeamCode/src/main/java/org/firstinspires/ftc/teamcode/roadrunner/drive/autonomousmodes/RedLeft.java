@@ -36,7 +36,7 @@ public class RedLeft extends LinearOpMode {
         this.Hardware = new hardware(hardwareMap);
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Hardware.getDeliverServo().setPosition(0.45);
+        Hardware.getDeliverServo().setPosition(0.35);
 
         Pose2d startPose = new Pose2d(0, 0, 0);
         drive.setPoseEstimate(startPose);
@@ -104,7 +104,7 @@ public class RedLeft extends LinearOpMode {
             } else if (pipeline.getAnalysis() == CENTER) {
                 HubPos = -1000;
             } else if (pipeline.getAnalysis() == RIGHT) {
-                HubPos = -1510;
+                HubPos = -1570;
             }
         }
 
@@ -117,7 +117,7 @@ public class RedLeft extends LinearOpMode {
             Hardware.getCarouselMotor().setPower(0);
             drive.followTrajectorySequence(trajSeqHub1);
             drive.followTrajectorySequence(trajSeqHub2);
-            Hardware.getDeliverServo().setPosition(0.10);
+            Hardware.getDeliverServo().setPosition(0);
             sleep(1000);
             drive.followTrajectorySequence(trajSeqPark1);
             drive.followTrajectorySequence(trajSeqPark2);

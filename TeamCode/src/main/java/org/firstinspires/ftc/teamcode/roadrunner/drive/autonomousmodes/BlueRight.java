@@ -39,7 +39,7 @@ public class BlueRight extends LinearOpMode {
         this.Hardware = new hardware(hardwareMap);
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Hardware.getDeliverServo().setPosition(0.45);
+        Hardware.getDeliverServo().setPosition(0.35);
 
         Pose2d startPose = new Pose2d(0, 0, 0);
         drive.setPoseEstimate(startPose);
@@ -71,7 +71,7 @@ public class BlueRight extends LinearOpMode {
         TrajectorySequence trajSeqPark1 = drive.trajectorySequenceBuilder(trajSeqHub2.end())
                 .lineToLinearHeading(new Pose2d(45,-28,Math.toRadians(0)))
                 .addDisplacementMarker(20,()-> {
-                    Hardware.getDeliverServo().setPosition(0.75);
+                    Hardware.getDeliverServo().setPosition(0.61);
                     Hardware.getLiftMotor().setTargetPosition(0);
                     Hardware.getLiftMotor().setPower(0.5);
                 })
@@ -109,7 +109,7 @@ public class BlueRight extends LinearOpMode {
             } else if (pipeline.getAnalysis() == CENTER) {
                 HubPos = -1000;
             } else if (pipeline.getAnalysis() == RIGHT) {
-                HubPos = -1510;
+                HubPos = -1570;
             }
         }
 
@@ -121,15 +121,15 @@ public class BlueRight extends LinearOpMode {
 
             drive.followTrajectorySequence(trajSeq);
             Hardware.getCarouselMotor().setPower(-0.45);
-            sleep(2000);
+            sleep(2500);
             Hardware.getCarouselMotor().setPower(0);
             drive.followTrajectorySequence(trajSeqHub1);
-        drive.followTrajectorySequence(trajSeqHub2);
+            drive.followTrajectorySequence(trajSeqHub2);
             //Input code to release preloaded freight
-            Hardware.getDeliverServo().setPosition(0.10);
+            Hardware.getDeliverServo().setPosition(0);
             sleep(1000);
             drive.followTrajectorySequence(trajSeqPark1);
-        drive.followTrajectorySequence(trajSeqPark2);
+            drive.followTrajectorySequence(trajSeqPark2);
 
         }
 }

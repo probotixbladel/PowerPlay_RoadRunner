@@ -83,11 +83,11 @@ public class BlueRightnomate extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajSeqPark4 = drive.trajectorySequenceBuilder(trajSeqPark3.end())
-                .lineToLinearHeading(new Pose2d(-4, 40, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-6, 40, Math.toRadians(-90)))
                 .build();
 
         TrajectorySequence trajSeqPark5 = drive.trajectorySequenceBuilder(trajSeqPark4.end())
-                .lineToLinearHeading(new Pose2d(-4, 70, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-6, 75, Math.toRadians(-90)))
                 .build();
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -118,7 +118,7 @@ public class BlueRightnomate extends LinearOpMode {
             } else if (pipeline.getAnalysis() == CENTER) {
                 HubPos = -1000;
             } else if (pipeline.getAnalysis() == RIGHT) {
-                HubPos = -1510;
+                HubPos = -1570;
             }
         }
 
@@ -130,7 +130,7 @@ public class BlueRightnomate extends LinearOpMode {
 
             drive.followTrajectorySequence(trajSeq);
             Hardware.getCarouselMotor().setPower(-0.45);
-            sleep(2200);
+            sleep(2500);
             Hardware.getCarouselMotor().setPower(0);
             drive.followTrajectorySequence(trajSeqHub1);
             drive.followTrajectorySequence(trajSeqHub2);
