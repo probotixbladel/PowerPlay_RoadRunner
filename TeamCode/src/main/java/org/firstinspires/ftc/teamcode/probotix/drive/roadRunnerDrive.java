@@ -141,7 +141,7 @@ public class roadRunnerDrive extends LinearOpMode {
 
 
                     } else if (gamepad2.dpad_up) {
-                        Hardware.getLiftMotor().setTargetPosition(-1600); //changed from 1510
+                        Hardware.getLiftMotor().setTargetPosition(-1900); //changed from 1510
                         Hardware.getLiftMotor().setPower(0.4);
 
 
