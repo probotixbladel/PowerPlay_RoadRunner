@@ -43,7 +43,7 @@ public class RedRight extends LinearOpMode {
 
         //create trajectories
         TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(25, 30, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(25, 25, Math.toRadians(0)))
                 .addDisplacementMarker(5,()-> {
                     Hardware.getLiftMotor().setTargetPosition(HubPos);
                     Hardware.getLiftMotor().setPower(0.5);
@@ -51,7 +51,7 @@ public class RedRight extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajSeq2 = drive.trajectorySequenceBuilder(trajSeq.end())
-                .lineToLinearHeading(new Pose2d(-2, 0, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-2, 0, Math.toRadians(90)))
                 .addDisplacementMarker(20,()-> {
                     Hardware.getDeliverServo().setPosition(0.61);
                     Hardware.getLiftMotor().setTargetPosition(0);
@@ -60,7 +60,7 @@ public class RedRight extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajSeq3 = drive.trajectorySequenceBuilder(trajSeq2.end())
-                .lineToLinearHeading(new Pose2d(-2, -30, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-2, -30, Math.toRadians(90)))
 
                 .build();
 
@@ -93,7 +93,7 @@ public class RedRight extends LinearOpMode {
             } else if (pipeline.getAnalysis() == CENTER) {
                 HubPos = -1000;
             } else if (pipeline.getAnalysis() == RIGHT) {
-                HubPos = -1570;
+                HubPos = -1700;
             }
         }
 

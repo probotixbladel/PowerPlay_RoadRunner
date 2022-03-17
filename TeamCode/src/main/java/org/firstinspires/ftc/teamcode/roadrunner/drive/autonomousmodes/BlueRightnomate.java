@@ -118,7 +118,7 @@ public class BlueRightnomate extends LinearOpMode {
             } else if (pipeline.getAnalysis() == CENTER) {
                 HubPos = -1000;
             } else if (pipeline.getAnalysis() == RIGHT) {
-                HubPos = -1570;
+                HubPos = -1700;
             }
         }
 

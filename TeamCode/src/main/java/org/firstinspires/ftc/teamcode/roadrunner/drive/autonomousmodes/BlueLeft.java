@@ -48,7 +48,7 @@ public class BlueLeft extends LinearOpMode {
 
 
         TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
-              .lineToLinearHeading(new Pose2d(25, -30, Math.toRadians(0)))
+              .lineToLinearHeading(new Pose2d(26, -28, Math.toRadians(0)))
                 .addDisplacementMarker(5,()-> {
                     Hardware.getLiftMotor().setTargetPosition(HubPos);
                     Hardware.getLiftMotor().setPower(0.5);
@@ -132,7 +132,7 @@ public class BlueLeft extends LinearOpMode {
             } else if (pipeline.getAnalysis() == CENTER) {
                 HubPos = -1000;
             } else if (pipeline.getAnalysis() == RIGHT) {
-                HubPos = -1570;
+                HubPos = -1700;
             }
         }
 

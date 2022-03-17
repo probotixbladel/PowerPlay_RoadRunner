@@ -42,15 +42,15 @@ public class RedLeftnomate extends LinearOpMode {
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(5, 25, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(4, 25, Math.toRadians(-90)))
                 .build();
 
         TrajectorySequence trajSeqHub1 = drive.trajectorySequenceBuilder(trajSeq.end())
-                .lineToLinearHeading(new Pose2d(40, 25, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(41, 25, Math.toRadians(-90)))
                 .build();
 
         TrajectorySequence trajSeqHub2 = drive.trajectorySequenceBuilder(trajSeqHub1.end())
-                .lineToLinearHeading(new Pose2d(40,-9,Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(41,-3,Math.toRadians(-90)))
                 .addDisplacementMarker(5,()-> {
                     Hardware.getLiftMotor().setTargetPosition(HubPos);
                     Hardware.getLiftMotor().setPower(0.5);
@@ -58,16 +58,16 @@ public class RedLeftnomate extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajSeqPark1 = drive.trajectorySequenceBuilder(trajSeqHub2.end())
-                .lineToLinearHeading(new Pose2d(40,25,Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(45,30,Math.toRadians(0)))
                 .addDisplacementMarker(20,()-> {
-                    Hardware.getDeliverServo().setPosition(0.75);
+                    Hardware.getDeliverServo().setPosition(0.61);
                     Hardware.getLiftMotor().setTargetPosition(0);
                     Hardware.getLiftMotor().setPower(0.5);
                 })
                 .build();
 
         TrajectorySequence trajSeqPark2 = drive.trajectorySequenceBuilder(trajSeqPark1.end())
-                .lineToLinearHeading(new Pose2d(19, 25, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(19, 30, Math.toRadians(90)))
                 .build();
 
         TrajectorySequence trajSeqPark3 = drive.trajectorySequenceBuilder(trajSeqPark2.end())
@@ -116,7 +116,7 @@ public class RedLeftnomate extends LinearOpMode {
             } else if (pipeline.getAnalysis() == CENTER) {
                 HubPos = -1000;
             } else if (pipeline.getAnalysis() == RIGHT) {
-                HubPos = -1570;
+                HubPos = -1700;
             }
         }
 

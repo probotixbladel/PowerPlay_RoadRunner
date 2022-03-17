@@ -42,7 +42,7 @@ public class RedLeft extends LinearOpMode {
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(5, 26, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(4, 25, Math.toRadians(-90)))
                 .build();
 
         TrajectorySequence trajSeqHub1 = drive.trajectorySequenceBuilder(trajSeq.end())
@@ -60,14 +60,14 @@ public class RedLeft extends LinearOpMode {
         TrajectorySequence trajSeqPark1 = drive.trajectorySequenceBuilder(trajSeqHub2.end())
                 .lineToLinearHeading(new Pose2d(40,25,Math.toRadians(-90)))
                 .addDisplacementMarker(20,()-> {
-                    Hardware.getDeliverServo().setPosition(0.75);
+                    Hardware.getDeliverServo().setPosition(0.61);
                     Hardware.getLiftMotor().setTargetPosition(0);
                     Hardware.getLiftMotor().setPower(0.5);
                 })
                 .build();
 
         TrajectorySequence trajSeqPark2 = drive.trajectorySequenceBuilder(trajSeqPark1.end())
-                .lineToLinearHeading(new Pose2d(30, 25, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(30, 30, Math.toRadians(-90)))
                 .build();
         // This code is from webcamexample
 
@@ -104,7 +104,7 @@ public class RedLeft extends LinearOpMode {
             } else if (pipeline.getAnalysis() == CENTER) {
                 HubPos = -1000;
             } else if (pipeline.getAnalysis() == RIGHT) {
-                HubPos = -1570;
+                HubPos = -1700;
             }
         }
 
