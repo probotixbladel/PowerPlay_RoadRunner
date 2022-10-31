@@ -63,7 +63,6 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
  * This is a modified SampleMecanumDrive class that implements the ability to cancel a trajectory
  * following. Essentially, it just forces the mode to IDLE.
  */
-@Config
 public class SampleMecanumDriveCancelable extends MecanumDrive {
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(8, 0, 0);
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(5, 0, 0);
