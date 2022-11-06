@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 
 public class hardware {
-        private DcMotorEx wheelLeftFront, wheelRightFront, wheelLeftRear, wheelRightRear;
+        public DcMotorEx wheelLeftFront, wheelRightFront, wheelLeftRear, wheelRightRear, liftMotor;
         private Servo grabServo;
 
         private HardwareMap hardwareMap;
@@ -24,6 +24,7 @@ public class hardware {
             this.wheelRightFront = (DcMotorEx) hardwareMap.dcMotor.get("wheelRightFront");
             this.wheelLeftRear = (DcMotorEx) hardwareMap.dcMotor.get("wheelLeftRear");
             this.wheelRightRear = (DcMotorEx) hardwareMap.dcMotor.get("wheelRightRear");
+            this liftMotor = (DcMotorEx) hardwareMap.dcMotor.get("liftMotor");
             this.grabServo = (Servo) hardwareMap.servo.get("grabServo");
             reset();
         }
@@ -33,6 +34,12 @@ public class hardware {
             wheelRightFront.setPower(0);
             wheelLeftRear.setPower(0);
             wheelRightRear.setPower(0);
+
+            liftMotor.setPower(0);
+            liftMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+            liftMotor.setTargetPosition(0);
+            liftMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+            liftMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             grabServo.setPosition(1);
 
@@ -54,7 +61,8 @@ public class hardware {
         }
 
         public enum  Gear {
-            FIRST(0.25), SECOND(0.5), THIRD(0.75), FOURTH(1.0);
+            FIRST(0.25), SECOND(0.5), THIRD(0.75), FOURTH(0.90);
+            //FOURTH was 1.0
 
             private double MaxSpeed;
 
@@ -85,6 +93,12 @@ public class hardware {
             return wheelRightRear;
         }
 
+        public DcMotorEx getLiftMotor() {
+        return liftMotor;
+    }
+
         public Servo getGrabServo(){return grabServo;}
+
+
     }
 
