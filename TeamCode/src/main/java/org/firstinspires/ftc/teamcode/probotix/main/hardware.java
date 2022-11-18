@@ -24,7 +24,7 @@ public class hardware {
             this.wheelRightFront = (DcMotorEx) hardwareMap.dcMotor.get("wheelRightFront");
             this.wheelLeftRear = (DcMotorEx) hardwareMap.dcMotor.get("wheelLeftRear");
             this.wheelRightRear = (DcMotorEx) hardwareMap.dcMotor.get("wheelRightRear");
-            this liftMotor = (DcMotorEx) hardwareMap.dcMotor.get("liftMotor");
+            this.liftMotor = (DcMotorEx) hardwareMap.dcMotor.get("liftMotor");
             this.grabServo = (Servo) hardwareMap.servo.get("grabServo");
             reset();
         }
