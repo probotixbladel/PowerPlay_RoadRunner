@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class BasicPipeline extends OpenCvPipeline {
 
     /**
-    Change later! */
+    TODO: Change later!*/
     public Point TOPLEFT_ANCHOR_POINT = new Point(20,20);
     public int REGION_WIDTH = 70;
     public int REGION_HEIGHT = 50;

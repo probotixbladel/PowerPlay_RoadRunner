@@ -92,6 +92,11 @@ public class roadRunnerDrive extends LinearOpMode {
                             )
                     );
 
+                    /**
+                     * grab_servo
+                     * 0.5 -> open
+                     * 0.8 -> closed
+                     */
 
                     if (Hardware.getGear() == null) {
                         Hardware.setGear(hardware.Gear.SECOND);
@@ -129,6 +134,15 @@ public class roadRunnerDrive extends LinearOpMode {
                     else if (gamepad2.dpad_right) {
                         Hardware.liftMotor.setTargetPosition(1500);
                         Hardware.liftMotor.setPower(0.4);
+                    }
+
+
+                    if (gamepad2.right_bumper) {
+                        Hardware.getGrabServo().setPosition(0.8);
+                    }
+
+                    else if (gamepad2.left_bumper) {
+                        Hardware.getGrabServo().setPosition(0.5);
                     }
 
 

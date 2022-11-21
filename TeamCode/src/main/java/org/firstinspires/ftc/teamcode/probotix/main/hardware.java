@@ -41,7 +41,7 @@ public class hardware {
             liftMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             liftMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-            grabServo.setPosition(1);
+            grabServo.setPosition(0.8);
 
 
 
