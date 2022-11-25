@@ -19,7 +19,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class Autonoom extends LinearOpMode {
     private hardware Hardware;
-    private AdvancedPipeline pipeline;
+    AdvancedPipeline pipeline = new AdvancedPipeline();
     OpenCvCamera webcam;
 
     @Override
@@ -34,15 +34,19 @@ public class Autonoom extends LinearOpMode {
         drive.setPoseEstimate(startPose);
 
         Trajectory traj1 = drive.trajectoryBuilder(startPose)
-                .splineTo(new Vector2d(5, 0), Math.toRadians(0))
+                .splineTo(new Vector2d(5, 0), Math.toRadians(-90))
                 .build();
 
         Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
-                .splineTo(new Vector2d(-5, 0), Math.toRadians(0))
+                .splineTo(new Vector2d(-5, 0), Math.toRadians(-90))
                 .build();
 
-        Trajectory traj3 = drive.trajectoryBuilder(traj1.end())
-                .splineTo(new Vector2d(0, 5), Math.toRadians(0))
+        Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
+                .splineTo(new Vector2d(0, 5), Math.toRadians(-90))
+                .build();
+
+        Trajectory traj4 = drive.trajectoryBuilder(traj3.end())
+                .splineTo(new Vector2d(-5, 0), Math.toRadians(-90))
                 .build();
 
 
@@ -61,19 +65,48 @@ public class Autonoom extends LinearOpMode {
             public void onError(int errorCode){}
         });
 
+        while(!opModeIsActive())
+        {
+
+            switch(pipeline.getColour()){
+
+                case RED:
+                    telemetry.addLine("Colour: RED");
+                    break;
+
+                case GREEN:
+                    telemetry.addLine("Colour: GREEN");
+                    break;
+
+                case BLUE:
+                    telemetry.addLine("Colour: BLUE");
+                    break;
+
+            }
+            telemetry.update();
+        }
+
 
         waitForStart();
 
         if (!isStopRequested())
-            if (pipeline.getColour() == AdvancedPipeline.SignalColour.BLUE){
-                drive.followTrajectory(traj1);
+
+            switch(pipeline.getColour()){
+
+                case RED:
+                    drive.followTrajectory(traj1);
+                    break;
+
+                case GREEN:
+                    drive.followTrajectory(traj2);
+                    break;
+
+                case BLUE:
+                    drive.followTrajectory(traj3);
+                    break;
+
             }
-        else if (pipeline.getColour() == AdvancedPipeline.SignalColour.RED){
-                drive.followTrajectory(traj2);
-            }
-        else {
-            drive.followTrajectory(traj3);
-            }
+
             //drive.followTrajectory(traj1);
         //drive.followTrajectory(traj2);
     }
