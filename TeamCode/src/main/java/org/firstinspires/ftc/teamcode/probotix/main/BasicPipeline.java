@@ -14,9 +14,9 @@ public class BasicPipeline extends OpenCvPipeline {
 
     /**
     TODO: Change later!*/
-    public Point TOPLEFT_ANCHOR_POINT = new Point(20,20);
-    public int REGION_WIDTH = 70;
-    public int REGION_HEIGHT = 50;
+    public Point TOPLEFT_ANCHOR_POINT = new Point(60,60);
+    public int REGION_WIDTH = 300;
+    public int REGION_HEIGHT = 100;
 
     /*
     * Points which actually define the sample region rectangles, derived from above values
@@ -49,7 +49,7 @@ public class BasicPipeline extends OpenCvPipeline {
 
     /**
     enum values we'll use to return the right colour     */
-    private enum SignalColour
+    public enum SignalColour
     {          //test result values:
         BLUE,  //255
         WHITE, //128
@@ -63,7 +63,7 @@ public class BasicPipeline extends OpenCvPipeline {
     Mat regionCb;
     Mat YCrCb = new Mat();
     Mat Cb = new Mat();
-    int avg;
+    public int avg;
 
     /**
     Runs on init     */
@@ -104,13 +104,7 @@ public class BasicPipeline extends OpenCvPipeline {
         Draw a rectangle on the screen with no functionality to see the shape of the set rectangle        */
         Imgproc.rectangle(input,pointA,pointB,new Scalar(0,0,0),2);
 
-        if(avg < 65) {
-            Colour = SignalColour.YELLOW;
-        } else if (avg > 191) {
-            Colour = SignalColour.BLUE;
-        } else {
-            Colour = SignalColour.WHITE;
-        }
+
 
         return input;
 
@@ -128,9 +122,19 @@ public class BasicPipeline extends OpenCvPipeline {
 
     public SignalColour GetSignalColour()
     {
+
+        if(avg < 65) {
+            Colour = SignalColour.YELLOW;
+        } else if (avg > 191) {
+            Colour = SignalColour.BLUE;
+        } else {
+            Colour = SignalColour.WHITE;
+        }
+
         return Colour;
     }
 
-
-
+    public int getAvg() {
+        return avg;
+    }
 }

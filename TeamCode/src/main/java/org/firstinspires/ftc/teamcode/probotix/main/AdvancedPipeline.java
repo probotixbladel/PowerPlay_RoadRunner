@@ -153,7 +153,7 @@ public class AdvancedPipeline extends OpenCvPipeline
     @Override
     public void init(Mat input)
     {
-        process(input);
+        processFrame(input);
     }
 
     @Override
