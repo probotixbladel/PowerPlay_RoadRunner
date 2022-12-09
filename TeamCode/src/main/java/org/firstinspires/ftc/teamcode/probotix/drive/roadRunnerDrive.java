@@ -39,7 +39,7 @@ import org.firstinspires.ftc.teamcode.probotix.main.hardware;
  * This sample utilizes the SampleMecanumDriveCancelable.java class.
  */
 @TeleOp(group = "advanced")
-public class roadRunnerDrive extends LinearOpMode {
+public class  roadRunnerDrive extends LinearOpMode {
     private hardware Hardware;
 
     private VoltageSensor batteryVoltageSensor;
@@ -92,11 +92,7 @@ public class roadRunnerDrive extends LinearOpMode {
                             )
                     );
 
-                    /**
-                     * grab_servo
-                     * 0.5 -> open
-                     * 0.8 -> closed
-                     */
+
 
                     if (Hardware.getGear() == null) {
                         Hardware.setGear(hardware.Gear.SECOND);
@@ -115,34 +111,52 @@ public class roadRunnerDrive extends LinearOpMode {
                         Hardware.setGear(hardware.Gear.FOURTH);
                         turnspeed = 0.6;
                     }
-
+                    //high junction
                     if (gamepad2.dpad_up) {
-                        Hardware.liftMotor.setTargetPosition(2750);
-                        Hardware.liftMotor.setPower(0.4);
+                        Hardware.liftMotor.setTargetPosition(4150);
+                        Hardware.liftMotor.setPower(0.6);
                     }
-
+                    //pick up
                     else if (gamepad2.dpad_down) {
                         Hardware.liftMotor.setTargetPosition(10);
-                        Hardware.liftMotor.setPower(0.4);
+                        Hardware.liftMotor.setPower(0.6);
                     }
-
+                    //low junction
                     else if (gamepad2.dpad_left) {
-                        Hardware.liftMotor.setTargetPosition(1500);
-                        Hardware.liftMotor.setPower(0.4);
-                    }
-
-                    else if (gamepad2.dpad_right) {
                         Hardware.liftMotor.setTargetPosition(2000);
-                        Hardware.liftMotor.setPower(0.4);
+                        Hardware.liftMotor.setPower(0.6);
+                    }
+                    //medium junction
+                    else if (gamepad2.dpad_right) {
+                        Hardware.liftMotor.setTargetPosition(3000);
+                        Hardware.liftMotor.setPower(0.6);
+                    }
+                    //pick up hover
+                    else if (gamepad2.a) {
+                        Hardware.liftMotor.setTargetPosition(900);
+                        Hardware.liftMotor.setPower(0.6);
                     }
 
+                    else if (gamepad2.y & gamepad2.dpad_up) {
+                        Hardware.liftMotor.setPower(0.2);
+                    }
 
-                    if (gamepad2.right_bumper) {
-                        Hardware.getGrabServo().setPosition(0.8);
+                    else if (gamepad2.y & gamepad2.dpad_down) {
+                        Hardware.liftMotor.setPower(-0.2);
+                    }
+
+                    /**
+                     * grab_servo
+                     * 0.70 -> open
+                     * 0.15 -> closed not correct servo position
+                     */
+
+                    else if (gamepad2.right_bumper) {
+                        Hardware.grabServo.setPosition(0.15);
                     }
 
                     else if (gamepad2.left_bumper) {
-                        Hardware.getGrabServo().setPosition(0.5);
+                        Hardware.grabServo.setPosition(0.70);
                     }
 
 
@@ -177,6 +191,8 @@ public class roadRunnerDrive extends LinearOpMode {
                     }
                     */
 
+
+                    /*
                     if (gamepad1.left_bumper)
                     {
                         Hardware.getGrabServo().setPosition(1);
@@ -185,7 +201,7 @@ public class roadRunnerDrive extends LinearOpMode {
                     {
                         Hardware.getGrabServo().setPosition(0.55);
                     }
-
+                    */
 
 
 

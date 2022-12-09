@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class hardware {
         public DcMotorEx wheelLeftFront, wheelRightFront, wheelLeftRear, wheelRightRear, liftMotor;
-        private Servo grabServo;
+        public Servo grabServo;
 
         private HardwareMap hardwareMap;
         private Gear gear;
@@ -41,7 +41,12 @@ public class hardware {
             liftMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             liftMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-            grabServo.setPosition(0.8);
+            /**
+             * grab_servo
+             * 0.70 -> open
+             * 0.15 -> closed not correct servo position
+             */
+            grabServo.setPosition(0.15);
 
 
 
