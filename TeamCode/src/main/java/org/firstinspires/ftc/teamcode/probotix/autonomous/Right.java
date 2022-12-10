@@ -200,7 +200,7 @@ public class Right extends LinearOpMode{
             sleep(5000);
             Hardware.grabServo.setPosition(0.70);
             sleep(1000);
-            Hardware.grabServo.setPosition(0.15);
+            Hardware.grabServo.setPosition(0.15);//hi
 
             sleep(100);
             drive.followTrajectory((delConeFW3));
