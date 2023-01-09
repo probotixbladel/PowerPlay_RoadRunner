@@ -188,12 +188,12 @@ public class Left extends LinearOpMode{
         //telemetry.setMsTransmissionInterval(50);
 
         if (!isStopRequested()) {
-            Hardware.liftMotor.setTargetPosition(900);
+            Hardware.liftMotor.setTargetPosition(-900);
             Hardware.liftMotor.setPower(0.6);
             drive.followTrajectory(delConeFW);
             drive.followTrajectory(delConeRS);
             drive.turn(Math.toRadians(-47));
-            Hardware.liftMotor.setTargetPosition(4140);
+            Hardware.liftMotor.setTargetPosition(-4140);
             Hardware.liftMotor.setPower(0.6);
             sleep(2000);
             drive.followTrajectory(delConeFW2);
