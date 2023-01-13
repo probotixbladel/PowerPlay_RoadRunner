@@ -69,7 +69,7 @@ public class Right extends LinearOpMode{
                 .lineTo(new Vector2d(-51,0))
                 .build();
 
-        Trajectory delConeFW2 = drive.trajectoryBuilder(delConeRS.end().plus(new Pose2d(0,0, Math.toRadians(37))))
+        Trajectory delConeFW2 = drive.trajectoryBuilder(delConeRS.end().plus(new Pose2d(0,0, Math.toRadians(45))))
                 .forward(-9,
                         SampleMecanumDrive.getVelocityConstraint(DriveConstants.MAX_VEL/3,DriveConstants.MAX_ANG_VEL,DriveConstants.TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL))
@@ -85,7 +85,7 @@ public class Right extends LinearOpMode{
                 .splineTo(new Vector2d(-5, 0), Math.toRadians(0))
                 .build();
 */
-        Trajectory park1 = drive.trajectoryBuilder(delConeFW3.end().plus(new Pose2d(0,0, Math.toRadians(-37))))
+        Trajectory park1 = drive.trajectoryBuilder(delConeFW3.end().plus(new Pose2d(0,0, Math.toRadians(-45))))
                 .lineTo(new Vector2d(-51,-27))
                 .build();
 
@@ -93,7 +93,7 @@ public class Right extends LinearOpMode{
                 .lineTo(new Vector2d(-51, 0))
                 .build();
 
-        Trajectory park3 = drive.trajectoryBuilder(delConeFW3.end().plus(new Pose2d(0,0, Math.toRadians(-37))))
+        Trajectory park3 = drive.trajectoryBuilder(delConeFW3.end().plus(new Pose2d(0,0, Math.toRadians(-45))))
                 .lineTo(new Vector2d(-51, 25))
                 .build();
 
@@ -192,7 +192,7 @@ public class Right extends LinearOpMode{
             Hardware.liftMotor.setPower(0.6);
             drive.followTrajectory(delConeFW);
             drive.followTrajectory(delConeRS);
-            drive.turn(Math.toRadians(37));
+            drive.turn(Math.toRadians(45));
             Hardware.liftMotor.setTargetPosition(-4140);
             Hardware.liftMotor.setPower(0.6);
             sleep(2000);
@@ -208,7 +208,7 @@ public class Right extends LinearOpMode{
             Hardware.liftMotor.setTargetPosition(0);
             Hardware.liftMotor.setPower(0.6);
             sleep(2000);
-            drive.turn(Math.toRadians(-37));
+            drive.turn(Math.toRadians(-45));
 
             //drive.followTrajectory(delConeFW2);
 
