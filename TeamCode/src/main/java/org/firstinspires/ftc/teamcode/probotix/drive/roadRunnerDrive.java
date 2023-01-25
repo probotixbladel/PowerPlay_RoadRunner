@@ -137,6 +137,12 @@ public class  roadRunnerDrive extends LinearOpMode {
                         Hardware.liftMotor.setPower(0.6);
                     }
 
+                    //ground junction
+                    else if (gamepad2.b) {
+                        Hardware.liftMotor.setTargetPosition(-300);
+                        Hardware.liftMotor.setPower(0.6);
+                    }
+
                     else if (gamepad2.y & gamepad2.dpad_up) {
                         Hardware.liftMotor.setPower(0.2);
                     }
