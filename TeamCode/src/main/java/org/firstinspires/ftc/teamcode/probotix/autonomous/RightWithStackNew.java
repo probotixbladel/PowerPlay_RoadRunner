@@ -91,7 +91,7 @@ public class RightWithStackNew extends LinearOpMode{
 
                 .splineToLinearHeading(new Pose2d(28,11.5,Math.toRadians(5)),Math.toRadians(0))
                 //.splineToSplineHeading(new Pose2d(26,11.5,Math.toRadians(0)),Math.toRadians(0))
-                .splineToConstantHeading(new Vector2d(14.9,9.9),Math.toRadians(0))
+                .splineToConstantHeading(new Vector2d(15.4,9.9),Math.toRadians(0))
                 .build();
 
         TrajectorySequence scoreSecondCone = drive.trajectorySequenceBuilder(moveToStack.end())
@@ -109,6 +109,22 @@ public class RightWithStackNew extends LinearOpMode{
 
                 .build();
 
+        TrajectorySequence getThirdCone = drive.trajectorySequenceBuilder(scoreSecondCone.end())
+                .setReversed(true)
+                .lineToLinearHeading(new Pose2d(50,12,Math.toRadians(0)))
+                .addTemporalMarker(1,()->{
+                    Hardware.liftMotor.setTargetPosition(-1700);
+                    Hardware.liftMotor.setPower(0.8);
+                })
+                .lineToConstantHeading(new Vector2d(9,12.9))
+                .addTemporalMarker(2,()->{
+                    Hardware.liftMotor.setTargetPosition(-1050);
+                    Hardware.liftMotor.setPower(0.8);
+                })
+                .build();
+
+
+        /*
         TrajectorySequence park1 = drive.trajectorySequenceBuilder(scoreSecondCone.end())
                 .setReversed(true)
                 .lineToLinearHeading(new Pose2d(64,12,Math.toRadians(-90)))
@@ -292,11 +308,11 @@ public class RightWithStackNew extends LinearOpMode{
             Hardware.liftMotor.setPower(0.8);
             sleep(800);
             Hardware.grabServo.setPosition(0);
-            sleep(1000);
+            sleep(700);
 
             Hardware.liftMotor.setTargetPosition(-1700);
             Hardware.liftMotor.setPower(0.8);
-            sleep(800);
+            sleep(700);
 
             drive.followTrajectorySequence(scoreSecondCone);
 
@@ -305,7 +321,7 @@ public class RightWithStackNew extends LinearOpMode{
             sleep(500);
 
 
-            drive.followTrajectorySequence(park1);
+            drive.followTrajectorySequence(getThirdCone);
 
             sleep(2000);
 
