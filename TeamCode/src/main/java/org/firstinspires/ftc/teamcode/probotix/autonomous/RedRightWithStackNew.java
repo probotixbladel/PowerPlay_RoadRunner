@@ -19,8 +19,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name="RightWithStackNew", group="probotix")
-public class RightWithStackNew extends LinearOpMode{
+@Autonomous(name="RedRightWithStackNew", group="probotix")
+public class RedRightWithStackNew extends LinearOpMode{
     private hardware Hardware;
 
     OpenCvCamera camera;
@@ -83,7 +83,7 @@ public class RightWithStackNew extends LinearOpMode{
                 .splineToLinearHeading(new Pose2d(28,11.5,Math.toRadians(5)),Math.toRadians(0))
                 //.splineToSplineHeading(new Pose2d(26,11.5,Math.toRadians(0)),Math.toRadians(0))
                 //.splineToConstantHeading(new Vector2d(14.4,9.9),Math.toRadians(0))
-                .splineToConstantHeading(new Vector2d(14,9.9),Math.toRadians(0))
+                .splineToConstantHeading(new Vector2d(12,9.9),Math.toRadians(0))
                 .build();
 
 
@@ -97,8 +97,8 @@ public class RightWithStackNew extends LinearOpMode{
                 })
                 .splineToLinearHeading(new Pose2d(50,11.5,Math.toRadians(180)),Math.toRadians(180))
 
-                .splineToLinearHeading(new Pose2d(63.8,19.5,Math.toRadians(-140)),Math.toRadians(-140))
-                                                            //Math.toRadians(-135)),Math.toRadians(-135))
+                .splineToLinearHeading(new Pose2d(63,19.5,Math.toRadians(-140)),Math.toRadians(-140))
+                //Math.toRadians(-135)),Math.toRadians(-135))  x:63.8 y:19.5
 
                 .build();
 
@@ -321,3 +321,4 @@ public class RightWithStackNew extends LinearOpMode{
         }
     }
 }
+
