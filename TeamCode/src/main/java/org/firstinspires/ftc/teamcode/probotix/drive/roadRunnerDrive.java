@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.probotix.drive;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -38,12 +40,16 @@ import org.firstinspires.ftc.teamcode.probotix.main.hardware;
  * <p>
  * This sample utilizes the SampleMecanumDriveCancelable.java class.
  */
+@Config
 @TeleOp(group = "advanced")
 public class  roadRunnerDrive extends LinearOpMode {
     private hardware Hardware;
 
     private VoltageSensor batteryVoltageSensor;
-    public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(1, 0.8, 1, 2);
+
+    public static PIDFCoefficients LiftPIDF = new PIDFCoefficients(1.56, 0.156*10, 0, 15.6);
+    public static int Pposition = 20;
+
 
 
     // Define 2 states, drive control or automatic control
@@ -59,26 +65,31 @@ public class  roadRunnerDrive extends LinearOpMode {
         SampleMecanumDriveCancelable drive = new SampleMecanumDriveCancelable(hardwareMap);
         this.Hardware = new hardware(hardwareMap);
 
+
         Hardware.init();
         Hardware.reset();
         Hardware.setGear(hardware.Gear.FOURTH);
         Hardware.getWheelLeftFront().setDirection(DcMotorSimple.Direction.REVERSE);
         Hardware.getWheelLeftRear().setDirection(DcMotorSimple.Direction.REVERSE);
 
+        //Hardware.liftMotor.setVelocityPIDFCoefficients(LiftPIDF.p,LiftPIDF.i, LiftPIDF.d, LiftPIDF.f);
+       // Hardware.liftMotor.setPositionPIDFCoefficients(Pposition);
+
 
         double turnspeed = 0.8;
-        int xm = 1;
-        int xs = 1;
-        int Idirection = 1;
-        int Cdirection = 1;
+
 
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         waitForStart();
 
+
         if (isStopRequested()) return;
 
         while (opModeIsActive() && !isStopRequested()) {
+            //To see what encoder values its giving
+                telemetry.addData("Encoder value:",Hardware.liftMotor.getCurrentPosition());
+                telemetry.update();
 
             drive.update();
 
@@ -91,6 +102,10 @@ public class  roadRunnerDrive extends LinearOpMode {
                                     -gamepad1.right_stick_x * Hardware.getGear().getMaxSpeed() * turnspeed
                             )
                     );
+
+
+                    //Hardware.liftMotor.setVelocityPIDFCoefficients(LiftPIDF.p,LiftPIDF.i, LiftPIDF.d, LiftPIDF.f);
+                    //Hardware.liftMotor.setPositionPIDFCoefficients(Pposition);
 
 
 
@@ -106,50 +121,48 @@ public class  roadRunnerDrive extends LinearOpMode {
                         turnspeed = 0.8;
                     } else if (gamepad1.x) {
                         Hardware.setGear(hardware.Gear.THIRD);
-                        turnspeed = 0.6;
+                        turnspeed = 0.8;
                     } else if (gamepad1.y) {
                         Hardware.setGear(hardware.Gear.FOURTH);
                         turnspeed = 0.6;
                     }
+
+                    Hardware.liftMotor.setPower(1);
                     //high junction
                     if (gamepad2.dpad_up) {
-                        Hardware.liftMotor.setTargetPosition(-4150);
-                        Hardware.liftMotor.setPower(0.6);
+                        Hardware.liftMotor.setTargetPosition(-4180);//-4150
                     }
                     //pick up
                     else if (gamepad2.dpad_down) {
-                        Hardware.liftMotor.setTargetPosition(-10);
-                        Hardware.liftMotor.setPower(0.6);
+                        Hardware.liftMotor.setTargetPosition(-10);//-10
                     }
                     //low junction
                     else if (gamepad2.dpad_left) {
-                        Hardware.liftMotor.setTargetPosition(-2000);
-                        Hardware.liftMotor.setPower(0.6);
+                        Hardware.liftMotor.setTargetPosition(-1800);//-2000
                     }
                     //medium junction
                     else if (gamepad2.dpad_right) {
                         Hardware.liftMotor.setTargetPosition(-3000);
-                        Hardware.liftMotor.setPower(0.6);
                     }
                     //pick up hover
                     else if (gamepad2.a) {
-                        Hardware.liftMotor.setTargetPosition(-900);
-                        Hardware.liftMotor.setPower(0.6);
+                        Hardware.liftMotor.setTargetPosition(-600);//-900
                     }
-
                     //ground junction 
                     else if (gamepad2.b) {
-                        Hardware.liftMotor.setTargetPosition(-300);
+                        Hardware.liftMotor.setTargetPosition(-150);//-300
                         Hardware.liftMotor.setPower(0.6);
                     }
 
+                    //wtf is this bullshit
+                    /*
                     else if (gamepad2.y & gamepad2.dpad_up) {
                         Hardware.liftMotor.setPower(0.2);
                     }
 
                     else if (gamepad2.y & gamepad2.dpad_down) {
                         Hardware.liftMotor.setPower(-0.2);
-                    }
+                    }*/
 
                     /**
                      * grab_servo
@@ -157,62 +170,12 @@ public class  roadRunnerDrive extends LinearOpMode {
                      * 0.15 -> closed not correct servo position
                      */
 
-                    else if (gamepad2.right_bumper) {
+                    if (gamepad2.right_bumper) {
                         Hardware.grabServo.setPosition(0.15);
                     }
-
                     else if (gamepad2.left_bumper) {
                         Hardware.grabServo.setPosition(0.70);
                     }
-
-
-                    /*
-                    //lift: start:0 eind:-2050
-                    if (gamepad2.dpad_down) {
-                        Hardware.getLiftMotor().setTargetPosition(0);
-                        Hardware.getLiftMotor().setPower(0.8);
-
-
-                    } else if (gamepad2.dpad_right) {
-                        Hardware.getLiftMotor().setTargetPosition(-500);
-                        Hardware.getLiftMotor().setPower(0.8);
-
-
-                    } else if (gamepad2.dpad_left) {
-                        Hardware.getLiftMotor().setTargetPosition(-1000);
-                        Hardware.getLiftMotor().setPower(0.8);
-
-
-                    } else if (gamepad2.dpad_up) {
-                        Hardware.getLiftMotor().setTargetPosition(-1900); //changed from 1510
-                        Hardware.getLiftMotor().setPower(0.8);
-
-
-                    }
-
-                    if  (Hardware.getLiftMotor().getCurrentPosition() > -10) {
-                        xm = 1;
-                    } else {
-                        xm = 0;
-                    }
-                    */
-
-
-                    /*
-                    if (gamepad1.left_bumper)
-                    {
-                        Hardware.getGrabServo().setPosition(1);
-                    }
-                    if(!gamepad1.left_bumper)
-                    {
-                        Hardware.getGrabServo().setPosition(0.55);
-                    }
-                    */
-
-
-
-                    //servo: start:0.73 mid:0.45 eind:0.12
-                    //lift: start:0 eind:-2050
 
 
                 case AUTOMATIC_CONTROL:

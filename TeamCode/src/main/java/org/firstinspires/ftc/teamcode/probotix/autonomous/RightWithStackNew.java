@@ -65,17 +65,8 @@ public class RightWithStackNew extends LinearOpMode{
                 .lineToConstantHeading(new Vector2d(35,-4))
                 .build();
 
-        /*
-        TrajectorySequence deliverCone = drive.trajectorySequenceBuilder(pushCone.end())
-                .setReversed(true)
-                .splineToSplineHeading(new Pose2d(35,7.8,Math.toRadians(135)),Math.toRadians(90))
-                .splineToConstantHeading(new Vector2d(49.2,7.5),Math.toRadians(135))
-                //.forward(-7)
-                .build();
-        */
 
         TrajectorySequence deliverCone = drive.trajectorySequenceBuilder(pushCone.end())
-                //.setReversed(true)
                 .forward(10)
 
                 .splineToLinearHeading(new Pose2d(44,4.5,Math.toRadians(135)),Math.toRadians(135))
@@ -88,11 +79,13 @@ public class RightWithStackNew extends LinearOpMode{
                     Hardware.liftMotor.setPower(0.8);
                 })
                 .forward(6)
-
+                //.splineToLinearHeading(new Pose2d(28,11.5,Math.toRadians(5)),Math.toRadians(0))
                 .splineToLinearHeading(new Pose2d(28,11.5,Math.toRadians(5)),Math.toRadians(0))
                 //.splineToSplineHeading(new Pose2d(26,11.5,Math.toRadians(0)),Math.toRadians(0))
-                .splineToConstantHeading(new Vector2d(15.4,9.9),Math.toRadians(0))
+                //.splineToConstantHeading(new Vector2d(14.4,9.9),Math.toRadians(0))
+                .splineToConstantHeading(new Vector2d(14,9.9),Math.toRadians(0))
                 .build();
+
 
         TrajectorySequence scoreSecondCone = drive.trajectorySequenceBuilder(moveToStack.end())
                 .setReversed(false)
@@ -104,7 +97,7 @@ public class RightWithStackNew extends LinearOpMode{
                 })
                 .splineToLinearHeading(new Pose2d(50,11.5,Math.toRadians(180)),Math.toRadians(180))
 
-                .splineToLinearHeading(new Pose2d(64,19.5,Math.toRadians(-135)),Math.toRadians(-135))
+                .splineToLinearHeading(new Pose2d(63.8,19.5,Math.toRadians(-135)),Math.toRadians(-135))
 
 
                 .build();
@@ -116,7 +109,7 @@ public class RightWithStackNew extends LinearOpMode{
                     Hardware.liftMotor.setTargetPosition(-1700);
                     Hardware.liftMotor.setPower(0.8);
                 })
-                .lineToConstantHeading(new Vector2d(9,12.9))
+                .lineToConstantHeading(new Vector2d(10.1,12.5))
                 .addTemporalMarker(2,()->{
                     Hardware.liftMotor.setTargetPosition(-1050);
                     Hardware.liftMotor.setPower(0.8);
@@ -124,68 +117,42 @@ public class RightWithStackNew extends LinearOpMode{
                 .build();
 
 
-        /*
-        TrajectorySequence park1 = drive.trajectorySequenceBuilder(scoreSecondCone.end())
+
+        TrajectorySequence park1 = drive.trajectorySequenceBuilder(getThirdCone.end())
                 .setReversed(true)
-                .lineToLinearHeading(new Pose2d(64,12,Math.toRadians(-90)))
-                .addTemporalMarker(1,()->{
+                .lineToConstantHeading(new Vector2d(59,12))
+
+                .addTemporalMarker(1.5,()->{
                     Hardware.liftMotor.setTargetPosition(0);
                     Hardware.liftMotor.setPower(0.8);
                 })
                 .build();
 
-        /*
-        TrajectorySequence park2 = drive.trajectorySequenceBuilder(scoreSecondCone.end())
+
+
+
+        TrajectorySequence park2 = drive.trajectorySequenceBuilder(getThirdCone.end())
                 .setReversed(true)
-                .splineToLinearHeading(new Pose2d(50,12,Math.toRadians(180)),Math.toRadians(0))
-                .addTemporalMarker(1,()->{
-                    Hardware.liftMotor.setTargetPosition(0);
-                    Hardware.liftMotor.setPower(0.8);
-                })
                 .lineToConstantHeading(new Vector2d(35,12))
+                .addTemporalMarker(1,()->{
+                    Hardware.liftMotor.setTargetPosition(0);
+                    Hardware.liftMotor.setPower(0.8);
+                })
+
                 .build();
 
-        TrajectorySequence park3 = drive.trajectorySequenceBuilder(scoreSecondCone.end())
+
+
+        TrajectorySequence park3 = drive.trajectorySequenceBuilder(getThirdCone.end())
                 .setReversed(true)
-                .splineToLinearHeading(new Pose2d(50,12,Math.toRadians(180)),Math.toRadians(0))
+                .lineToLinearHeading(new Pose2d(12.5,30,Math.toRadians(90)))
+
                 .addTemporalMarker(1,()->{
                     Hardware.liftMotor.setTargetPosition(0);
                     Hardware.liftMotor.setPower(0.8);
                 })
                 .build();
-        */
 
-
-
-
-/*
-        TrajectorySequence deliverCone = drive.trajectorySequenceBuilder(pushCone.end())
-                .setReversed(true)
-                .splineToSplineHeading(new Pose2d(35,5.2,Math.toRadians(135)),Math.toRadians(90))
-                .splineToConstantHeading(new Vector2d(47.5,5.2),Math.toRadians(135))
-                .build();*/
-/*
-        TrajectorySequence deliverCone = drive.trajectorySequenceBuilder(pushCone.end())
-                //.setReversed(true)
-                .forward(-10)
-                .setTangent(-20)
-                //.splineToSplineHeading(new Pose2d(35,10,Math.toRadians(135)),Math.toRadians(90))
-                .splineToLinearHeading(new Pose2d(47.5,5.2,Math.toRadians(135)),Math.toRadians(135))
-                .build();
-*/
-
-/*
-        Trajectory pushCone = drive.trajectoryBuilder(startPose)
-                .lineToConstantHeading(new Vector2d(35,-4))
-                .build();
-
-        Trajectory deliverCone = drive.trajectoryBuilder(pushCone.end())
-
-                .splineToSplineHeading(new Pose2d(35,5,Math.toRadians(135)),Math.toRadians(90))
-
-                .splineToConstantHeading(new Vector2d(29,5),Math.toRadians(135))
-                .build();
-*/
 
 
 
@@ -304,6 +271,7 @@ public class RightWithStackNew extends LinearOpMode{
 
             drive.followTrajectorySequence(moveToStack);
 
+
             Hardware.liftMotor.setTargetPosition(-560);
             Hardware.liftMotor.setPower(0.8);
             sleep(800);
@@ -314,6 +282,7 @@ public class RightWithStackNew extends LinearOpMode{
             Hardware.liftMotor.setPower(0.8);
             sleep(700);
 
+
             drive.followTrajectorySequence(scoreSecondCone);
 
             sleep(1500);
@@ -321,74 +290,32 @@ public class RightWithStackNew extends LinearOpMode{
             sleep(500);
 
 
+
+
             drive.followTrajectorySequence(getThirdCone);
 
-            sleep(2000);
-
-            /*
-            sleep(2000);
-            drive.followTrajectory(delConeFW2);
-            sleep(1000);
-            Hardware.grabServo.setPosition(0.70);
-            sleep(500);
-            Hardware.grabServo.setPosition(0.15);//hi
-
-            sleep(100);
-            drive.followTrajectory((delConeFW3));
-            //Hardware.grabServo.setPosition(0.70);
-            Hardware.liftMotor.setTargetPosition(0);
-            Hardware.liftMotor.setPower(0.6);
-            sleep(2000);
+            Hardware.liftMotor.setTargetPosition(-480);
+            Hardware.liftMotor.setPower(0.8);
+            sleep(800);
 
 
-            drive.turn(Math.toRadians(-45));
-            Hardware.grabServo.setPosition(0.70);
-            Hardware.liftMotor.setTargetPosition(-1700);
-            Hardware.liftMotor.setPower(0.6);
-            drive.followTrajectory(moveToStack);
-            drive.followTrajectory(moveToStack2);
-            Hardware.liftMotor.setTargetPosition(-700);
-            Hardware.liftMotor.setPower(0.6);
-            sleep(1000);
             Hardware.grabServo.setPosition(0);
-            sleep(1000);
+            sleep(700);
+
             Hardware.liftMotor.setTargetPosition(-1700);
-            Hardware.liftMotor.setPower(0.6);
-            sleep(1000);
-            Hardware.liftMotor.setTargetPosition(-4140);
             Hardware.liftMotor.setPower(0.8);
-            drive.followTrajectory(moveAwayFromStack);
-            drive.followTrajectory(deliverStackCone1);
-            sleep(1000);
-            Hardware.grabServo.setPosition(0.70);
-            sleep(500);
-            drive.followTrajectory(park2);
-            Hardware.liftMotor.setTargetPosition(0);
-            Hardware.liftMotor.setPower(0.8);
+            sleep(700);
 
 
-
-
-
-            sleep(2000);
-
-             */
-
-
-            //drive.followTrajectory(delConeFW2);
-
-            /*drive.followTrajectory(delConeFW2);
-*/
-            /*
             if (lastId == 0) {
-                drive.followTrajectory(park1);
+                drive.followTrajectorySequence(park1);
             } else if (lastId == 2) {
-                //drive.followTrajectory(park2);
+                drive.followTrajectorySequence(park2);
             } else if (lastId == 4) {
-                drive.followTrajectory(park3);
+                drive.followTrajectorySequence(park3);
             }
 
-             */
+            sleep(1000);
 
 
         }
