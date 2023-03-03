@@ -19,8 +19,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name="RightWithStackNew", group="probotix")
-public class RedRightWithStackNew extends LinearOpMode{
+@Autonomous(name="LeftWithStackNew", group="probotix")
+public class BlueLeftWithStackNew extends LinearOpMode{
     private hardware Hardware;
 
     OpenCvCamera camera;
@@ -49,27 +49,31 @@ public class RedRightWithStackNew extends LinearOpMode{
     final float THRESHOLD_HIGH_DECIMATION_RANGE_METERS = 1.0f;
     final int THRESHOLD_NUM_FRAMES_NO_DETECTION_BEFORE_LOW_DECIMATION = 4;
 
+
+
     @Override
     public void runOpMode() throws InterruptedException {
         this.Hardware = new hardware(hardwareMap);
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
 
+
+
         //forward -x, backward +x, left -y, right +y
         // We want to start the bot at x: 0, y: 0, heading: 0 degrees
         //Pose2d startPose = new Pose2d(62, 35, Math.toRadians(90));
-        Pose2d startPose = new Pose2d(35, 62, Math.toRadians(90));
+        Pose2d startPose = new Pose2d(105.5, 62, Math.toRadians(90));
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence pushCone = drive.trajectorySequenceBuilder(startPose)
-                .lineToConstantHeading(new Vector2d(35,-4))
+                .lineToConstantHeading(new Vector2d(105.5,-4))
                 .build();
 
 
         TrajectorySequence deliverCone = drive.trajectorySequenceBuilder(pushCone.end())
                 .forward(10)
-
-                .splineToLinearHeading(new Pose2d(44,4.5,Math.toRadians(135)),Math.toRadians(135))
+                    //100.6 .5
+                .splineToLinearHeading(new Pose2d(104,2,Math.toRadians(45)),Math.toRadians(45))
                 .build();
 
         TrajectorySequence moveToStack = drive.trajectorySequenceBuilder(deliverCone.end())
@@ -80,36 +84,38 @@ public class RedRightWithStackNew extends LinearOpMode{
                 })
                 .forward(6)
                 //.splineToLinearHeading(new Pose2d(28,11.5,Math.toRadians(5)),Math.toRadians(0))
-                .splineToLinearHeading(new Pose2d(28,11.5,Math.toRadians(5)),Math.toRadians(0))
+                .splineToLinearHeading(new Pose2d(112.5,14,Math.toRadians(180)),Math.toRadians(180))
                 //.splineToSplineHeading(new Pose2d(26,11.5,Math.toRadians(0)),Math.toRadians(0))
                 //.splineToConstantHeading(new Vector2d(14.4,9.9),Math.toRadians(0))
-                .splineToConstantHeading(new Vector2d(14,6.5),Math.toRadians(0))
+                .splineToConstantHeading(new Vector2d(130 ,14),Math.toRadians(180))
                 .build();
+
 
 
         TrajectorySequence scoreSecondCone = drive.trajectorySequenceBuilder(moveToStack.end())
                 .setReversed(false)
 
-                .splineToConstantHeading(new Vector2d(28,11.5),Math.toRadians(180))
+                .splineToConstantHeading(new Vector2d(120,11),Math.toRadians(0))
                 .addTemporalMarker(1,()->{
                     Hardware.liftMotor.setTargetPosition(-4180);
                     Hardware.liftMotor.setPower(0.8);
                 })
-                .splineToLinearHeading(new Pose2d(50,11.5,Math.toRadians(180)),Math.toRadians(180))
+                .splineToLinearHeading(new Pose2d(95,11,Math.toRadians(0)),Math.toRadians(0))
 
-                .splineToLinearHeading(new Pose2d(64,18.5,Math.toRadians(-140)),Math.toRadians(-140))
-                //Math.toRadians(-135)),Math.toRadians(-135))  x:63.8 y:19.5
+                .splineToLinearHeading(new Pose2d(80.2,20,Math.toRadians(-40)),Math.toRadians(-40))
+                //Math.toRadians(-135)),Math.toRadians(-135))
 
                 .build();
 
+
         TrajectorySequence getThirdCone = drive.trajectorySequenceBuilder(scoreSecondCone.end())
                 .setReversed(true)
-                .lineToLinearHeading(new Pose2d(50,12,Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(90,14,Math.toRadians(180)))
                 .addTemporalMarker(1,()->{
                     Hardware.liftMotor.setTargetPosition(-1700);
                     Hardware.liftMotor.setPower(0.8);
                 })
-                .lineToConstantHeading(new Vector2d(10.1,11.8))
+                .lineToConstantHeading(new Vector2d(133,15.2))
                 .addTemporalMarker(2,()->{
                     Hardware.liftMotor.setTargetPosition(-1050);
                     Hardware.liftMotor.setPower(0.8);
@@ -118,11 +124,14 @@ public class RedRightWithStackNew extends LinearOpMode{
 
 
 
+
+
         TrajectorySequence park1 = drive.trajectorySequenceBuilder(getThirdCone.end())
                 .setReversed(true)
-                .lineToConstantHeading(new Vector2d(59,12))
+                //.lineToConstantHeading(new Vector2d(129.5,12))
+                .lineToLinearHeading(new Pose2d(133,30,Math.toRadians(90)))
 
-                .addTemporalMarker(1.5,()->{
+                .addTemporalMarker(1,()->{
                     Hardware.liftMotor.setTargetPosition(0);
                     Hardware.liftMotor.setPower(0.8);
                 })
@@ -133,7 +142,7 @@ public class RedRightWithStackNew extends LinearOpMode{
 
         TrajectorySequence park2 = drive.trajectorySequenceBuilder(getThirdCone.end())
                 .setReversed(true)
-                .lineToConstantHeading(new Vector2d(35,12))
+                .lineToConstantHeading(new Vector2d(109,13))
                 .addTemporalMarker(1,()->{
                     Hardware.liftMotor.setTargetPosition(0);
                     Hardware.liftMotor.setPower(0.8);
@@ -145,16 +154,13 @@ public class RedRightWithStackNew extends LinearOpMode{
 
         TrajectorySequence park3 = drive.trajectorySequenceBuilder(getThirdCone.end())
                 .setReversed(true)
-                .lineToLinearHeading(new Pose2d(12.5,30,Math.toRadians(90)))
+                .lineToConstantHeading(new Vector2d(84.1,13))
 
-                .addTemporalMarker(1,()->{
+                .addTemporalMarker(1.5,()->{
                     Hardware.liftMotor.setTargetPosition(0);
                     Hardware.liftMotor.setPower(0.8);
                 })
                 .build();
-
-
-
 
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -172,6 +178,9 @@ public class RedRightWithStackNew extends LinearOpMode{
             @Override
             public void onError(int errorCode){}
         });
+
+
+
 
         //FtcDashboard dashboard = FtcDashboard.getInstance();
         //dashboard.startCameraStream(webcam, 10);
@@ -247,6 +256,8 @@ public class RedRightWithStackNew extends LinearOpMode{
 
         //telemetry.setMsTransmissionInterval(50);
 
+
+
         if (!isStopRequested()) {
             Hardware.liftMotor.setTargetPosition(-2200);
             Hardware.liftMotor.setPower(0.7);
@@ -262,6 +273,10 @@ public class RedRightWithStackNew extends LinearOpMode{
 
             drive.followTrajectorySequence(deliverCone);
 
+
+
+
+
             sleep(1500);
             Hardware.grabServo.setPosition(0.70);
             sleep(500);
@@ -269,7 +284,11 @@ public class RedRightWithStackNew extends LinearOpMode{
 
 
 
+
+
             drive.followTrajectorySequence(moveToStack);
+
+
 
 
             Hardware.liftMotor.setTargetPosition(-560);
@@ -285,6 +304,9 @@ public class RedRightWithStackNew extends LinearOpMode{
 
             drive.followTrajectorySequence(scoreSecondCone);
 
+            //sleep(5000);
+
+
             sleep(1500);
             Hardware.grabServo.setPosition(0.70);
             sleep(500);
@@ -293,6 +315,8 @@ public class RedRightWithStackNew extends LinearOpMode{
 
 
             drive.followTrajectorySequence(getThirdCone);
+
+
 
             Hardware.liftMotor.setTargetPosition(-480);
             Hardware.liftMotor.setPower(0.8);
@@ -305,6 +329,7 @@ public class RedRightWithStackNew extends LinearOpMode{
             Hardware.liftMotor.setTargetPosition(-1700);
             Hardware.liftMotor.setPower(0.8);
             sleep(700);
+
 
 
             if (lastId == 0) {

@@ -14,6 +14,8 @@ import com.qualcomm.robotcore.hardware.VoltageSensor;
 import org.firstinspires.ftc.teamcode.probotix.main.SampleMecanumDriveCancelable;
 import org.firstinspires.ftc.teamcode.probotix.main.hardware;
 
+import java.util.function.ToIntFunction;
+
 /**
  * This opmode demonstrates how one can augment driver control by following Road Runner arbitrary
  * Road Runner trajectories at any time during teleop. This really isn't recommended at all. This is
@@ -79,6 +81,7 @@ public class  roadRunnerDrive extends LinearOpMode {
         double turnspeed = 0.8;
 
 
+
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         waitForStart();
@@ -102,6 +105,9 @@ public class  roadRunnerDrive extends LinearOpMode {
                                     -gamepad1.right_stick_x * Hardware.getGear().getMaxSpeed() * turnspeed
                             )
                     );
+
+
+
 
 
                     //Hardware.liftMotor.setVelocityPIDFCoefficients(LiftPIDF.p,LiftPIDF.i, LiftPIDF.d, LiftPIDF.f);
@@ -151,8 +157,19 @@ public class  roadRunnerDrive extends LinearOpMode {
                     //ground junction 
                     else if (gamepad2.b) {
                         Hardware.liftMotor.setTargetPosition(-150);//-300
-                        Hardware.liftMotor.setPower(0.6);
+                        //Hardware.liftMotor.setPower(0.6);
                     }
+
+                    int currentPosition = Hardware.liftMotor.getCurrentPosition();
+                    float rightTrigger = gamepad2.right_trigger*10;
+                    float leftTrigger = gamepad2.left_trigger*10;
+
+                    if(gamepad2.right_trigger > 0.1 && currentPosition > -4470) {
+                        Hardware.liftMotor.setTargetPosition(currentPosition - (int)rightTrigger*10);
+                    } else if(gamepad2.left_trigger > 0.1 && currentPosition < -30) {
+                        Hardware.liftMotor.setTargetPosition(currentPosition + (int)leftTrigger*10);
+                    }
+
 
                     //wtf is this bullshit
                     /*

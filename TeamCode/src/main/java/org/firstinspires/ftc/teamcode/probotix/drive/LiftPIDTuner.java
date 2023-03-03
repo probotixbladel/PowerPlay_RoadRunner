@@ -26,6 +26,7 @@ import org.firstinspires.ftc.teamcode.probotix.main.hardware;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
+@Disabled
 @TeleOp(name="LiftPIDTuner", group="Linear Opmode")
 public class LiftPIDTuner extends LinearOpMode {
 
