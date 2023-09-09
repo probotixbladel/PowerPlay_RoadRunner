@@ -46,7 +46,7 @@ import java.util.function.ToIntFunction;
  */
 @Config
 @TeleOp(group = "advanced")
-public class  roadRunnerDrive extends LinearOpMode {
+public class  OneController extends LinearOpMode {
     private hardware Hardware;
 
     private VoltageSensor batteryVoltageSensor;
@@ -77,7 +77,7 @@ public class  roadRunnerDrive extends LinearOpMode {
         Hardware.getWheelLeftRear().setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Hardware.liftMotor.setVelocityPIDFCoefficients(LiftPIDF.p,LiftPIDF.i, LiftPIDF.d, LiftPIDF.f);
-       // Hardware.liftMotor.setPositionPIDFCoefficients(Pposition);
+        // Hardware.liftMotor.setPositionPIDFCoefficients(Pposition);
 
 
         double turnspeed = 0.8;
@@ -93,8 +93,8 @@ public class  roadRunnerDrive extends LinearOpMode {
 
         while (opModeIsActive() && !isStopRequested()) {
             //To see what encoder values its giving
-                telemetry.addData("Encoder value:",Hardware.liftMotor.getCurrentPosition());
-                telemetry.update();
+            telemetry.addData("Encoder value:",Hardware.liftMotor.getCurrentPosition());
+            telemetry.update();
 
             drive.update();
 
@@ -121,13 +121,14 @@ public class  roadRunnerDrive extends LinearOpMode {
                         Hardware.setGear(hardware.Gear.SECOND);
                     }
 
-                    if (gamepad1.a) {
+                   /* if (gamepad1.a) {
                         Hardware.setGear(hardware.Gear.FIRST);
                         turnspeed = 1;
                     } else if (gamepad1.b) {
                         Hardware.setGear(hardware.Gear.SECOND);
                         turnspeed = 0.8;
-                    } else if (gamepad1.x) {
+                    }  */
+                    if (gamepad1.x) {
                         Hardware.setGear(hardware.Gear.THIRD);
                         turnspeed = 0.8;
                     } else if (gamepad1.y) {
@@ -138,42 +139,42 @@ public class  roadRunnerDrive extends LinearOpMode {
                     Hardware.liftMotor.setPower(1);
                     //high junction
                     //was gamepad2
-                    if (gamepad2.dpad_up) {
+                    if (gamepad1.dpad_up) {
                         Hardware.liftMotor.setTargetPosition(-4180);//-4150
                     }
                     //medium junction
-                    else if (gamepad2.dpad_right) {
+                    else if (gamepad1.dpad_right) {
                         Hardware.liftMotor.setTargetPosition(-3000);
                     }
                     //pick up
-                    else if (gamepad2.dpad_down) {
+                    else if (gamepad1.dpad_down) {
                         Hardware.liftMotor.setTargetPosition(-10);//-10
                     }
                     //low junction
                     //was gamepad2
-                    else if (gamepad2.dpad_left) {
+                    else if (gamepad1.dpad_left) {
                         Hardware.liftMotor.setTargetPosition(-1800);//-2000
                     }
 
                     //pick up hover
-                    else if (gamepad2.a) {
+                    else if (gamepad1.a) {
                         Hardware.liftMotor.setTargetPosition(-600);//-900
                     }
                     //ground junction
-                    else if (gamepad2.b) {
+                    else if (gamepad1.b) {
                         Hardware.liftMotor.setTargetPosition(-150);//-300
                         //Hardware.liftMotor.setPower(0.6);
                     }
 
 //was gamepad2
                     int currentPosition = Hardware.liftMotor.getCurrentPosition();
-                    float rightTrigger = gamepad2.right_trigger*10;
-                    float leftTrigger = gamepad2.left_trigger*10;
+                    float rightTrigger = gamepad1.right_trigger*10;
+                    float leftTrigger = gamepad1.left_trigger*10;
 
 //was gamepad2
-                    if(gamepad2.right_trigger > 0.1 && currentPosition > -4470) {
+                    if(gamepad1.right_trigger > 0.1 && currentPosition > -4470) {
                         Hardware.liftMotor.setTargetPosition(currentPosition - (int)rightTrigger*10);
-                    } else if(gamepad2.left_trigger > 0.1 && currentPosition < -30) {
+                    } else if(gamepad1.left_trigger > 0.1 && currentPosition < -30) {
                         Hardware.liftMotor.setTargetPosition(currentPosition + (int)leftTrigger*10);
                     }
 
@@ -194,12 +195,12 @@ public class  roadRunnerDrive extends LinearOpMode {
                      * 0.70 -> open
                      * 0.15 -> closed not correct servo position
                      */
-                        // reserve grijper
+                    // reserve grijper
                     //was gamepad2
-                    if (gamepad2.right_bumper) {
+                    if (gamepad1.right_bumper) {
                         Hardware.grabServo.setPosition(0.15);
                     }
-                    else if (gamepad2.left_bumper) {
+                    else if (gamepad1.left_bumper) {
                         Hardware.grabServo.setPosition(0.70);
                     }
 
@@ -247,3 +248,4 @@ public class  roadRunnerDrive extends LinearOpMode {
     }
 
 }
+

@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class hardware {
         public DcMotorEx wheelLeftFront, wheelRightFront, wheelLeftRear, wheelRightRear, liftMotor;
-        public Servo grabServo;
+        public Servo grabServo, stickServo;
 
 
         private HardwareMap hardwareMap;
@@ -27,6 +27,7 @@ public class hardware {
             this.wheelRightRear = (DcMotorEx) hardwareMap.dcMotor.get("wheelRightRear");
             this.liftMotor = (DcMotorEx) hardwareMap.dcMotor.get("liftMotor");
             this.grabServo = (Servo) hardwareMap.servo.get("grabServo");
+            //this.stickServo = (Servo) hardwareMap.servo.get("stickServo");
             reset();
         }
 
@@ -48,6 +49,8 @@ public class hardware {
              * 0.15 -> closed not correct servo position
              */
             grabServo.setPosition(0.15);
+            //stickServo.setPosition(1);
+            //0.5 is not correct yet
 
 
 
@@ -104,6 +107,8 @@ public class hardware {
     }
 
         public Servo getGrabServo(){return grabServo;}
+
+        public Servo getStickServo(){return stickServo;}
 
 
     }
