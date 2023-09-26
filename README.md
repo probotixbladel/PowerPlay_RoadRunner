@@ -1,5 +1,5 @@
 # Eigen Comment
-Dit is de code voor onze [FTC](http://ftcnetherlands.eu/) robot 2022-2023 [POWERPLAY](https://docs.revrobotics.com/ftc-kickoff-concepts/powerplay-2022-2023/game-breakdown).
+Dit is de code voor onze [FTC](http://ftcnetherlands.eu/) robot voor het seizoen 2022-2023, [POWERPLAY](https://docs.revrobotics.com/ftc-kickoff-concepts/powerplay-2022-2023/game-breakdown).
 
 De robot is gemaakt en geprogrammeerd door studenten van het Pius X College in Bladel.
 
