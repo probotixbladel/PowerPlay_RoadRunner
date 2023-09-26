@@ -38,6 +38,11 @@ public class RedRight extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         Hardware.getDeliverServo().setPosition(0.35);
 
+
+
+        // de volgende code is om er voor te zorgen dat de robot naar de juiste plekken rijdt tijdens de autonomous periode
+
+
         Pose2d startPose = new Pose2d(0, 0, 0);
         drive.setPoseEstimate(startPose);
 

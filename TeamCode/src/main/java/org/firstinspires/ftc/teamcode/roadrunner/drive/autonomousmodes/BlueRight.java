@@ -47,7 +47,7 @@ public class BlueRight extends LinearOpMode {
         // This code is from webcamexample
 
 
-        //Is this a possible method even during field setup?
+        // de volgende code is om er voor te zorgen dat de robot naar de juiste plekken rijdt tijdens de autonomous periode
 
 
         TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)

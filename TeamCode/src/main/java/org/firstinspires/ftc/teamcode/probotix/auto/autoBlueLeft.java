@@ -37,23 +37,17 @@ public class autoBlueLeft extends LinearOpMode {
         this.Autohelper = new autohelper(Hardware, hardwareVariable.FREIGHTFRENZY_ROBOT, this);
 
         Hardware.init();
- // This code is from webcamexample
+
 
         telemetry.addData("Status", "Initialized");
 
 
-//Until here
+
         waitForStart();
 
         if(opModeIsActive()) {
 
 
-            //telemetry.addData("idk", "idk");
-            //telemetry.update();
-            //Hardware.getWheelLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            //Hardware.getWheelLeftRear().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            //Hardware.getWheelRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            //Hardware.getWheelRightRear().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             Hardware.getWheelLeftFront().setDirection(DcMotorSimple.Direction.REVERSE);
             Hardware.getWheelLeftRear().setDirection(DcMotorSimple.Direction.REVERSE);
@@ -65,10 +59,6 @@ public class autoBlueLeft extends LinearOpMode {
 
 
 
-            //Hardware.getWheelLeftFront().setTargetPosition(0);
-            //Hardware.getWheelRightFront().setTargetPosition(0);
-            //Hardware.getWheelLeftRear().setTargetPosition(0);
-            //Hardware.getWheelRightRear().setTargetPosition(0);
 
             Autohelper.addWheelTicks(0, 0, 0, 0);
 
@@ -78,9 +68,8 @@ public class autoBlueLeft extends LinearOpMode {
             Hardware.getWheelRightRear().setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
 
             Hardware.getDeliverServo().setPosition(0.45);
-            //Hardware.getLiftMotor().setTargetPosition(0);
 
-            //Dr ive to shipping hub
+            //Drive to shipping hub
             Autohelper.driveAndWait(600.0,0.0, 0.0, 1.5, 1.7);
             Autohelper.driveAndWait(0.0,0.0, -45.0, 0.5, 0.7);
             Autohelper.driveAndWait(-600.0,00.0, 0.0, 1.5, 1.7);

@@ -50,7 +50,7 @@ public class autoENCODERS extends LinearOpMode {
         this.Autohelper = new autohelper(Hardware, hardwareVariable.FREIGHTFRENZY_ROBOT, this);
 
         Hardware.init();
- // This code is from webcamexample
+        // This code is from webcamexample
 
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());

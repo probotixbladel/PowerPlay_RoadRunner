@@ -11,7 +11,7 @@ public class TuningController {
     public static double MOTOR_MAX_RPM = 340;
     public static double MOTOR_GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
 
-    public static double maxspeed = 306; //306
+    public static double maxspeed = 306;
 
     public static double TESTING_MAX_SPEED = 0.9 * MOTOR_MAX_RPM;
     public static double TESTING_MIN_SPEED = 0.3 * MOTOR_MAX_RPM;
@@ -50,54 +50,7 @@ public class TuningController {
     public TuningController() {
         stateMachine = new StateMachineBuilder<State>()
 
-                /*
-                .state(State.RAMPING_UP)
-                .transitionTimed(ZSTATE1_RAMPING_UP_DURATION)
-                .onEnter(externalTimer::reset)
-                .loop(() -> {
-                    double progress = externalTimer.seconds() / ZSTATE1_RAMPING_UP_DURATION;
-                    double target = progress * (TESTING_MAX_SPEED - TESTING_MIN_SPEED) + TESTING_MIN_SPEED;
 
-                    currentTargetVelo = rpmToTicksPerSecond(target);
-                })
-
-                .state(State.COASTING_1)
-                .transitionTimed(ZSTATE2_COASTING_1_DURATION)
-                .onEnter(() -> currentTargetVelo = rpmToTicksPerSecond(TESTING_MAX_SPEED))
-
-                .state(State.RAMPING_DOWN)
-                .transitionTimed(ZSTATE3_RAMPING_DOWN_DURATION)
-                .onEnter(externalTimer::reset)
-                .loop(() -> {
-                    double progress = externalTimer.seconds() / ZSTATE3_RAMPING_DOWN_DURATION;
-                    double target = TESTING_MAX_SPEED - progress * (TESTING_MAX_SPEED - TESTING_MIN_SPEED);
-
-                    currentTargetVelo = rpmToTicksPerSecond(target);
-                })
-
-                .state(State.COASTING_2)
-                .transitionTimed(ZSTATE4_COASTING_2_DURATION)
-                .onEnter(() -> currentTargetVelo = rpmToTicksPerSecond(TESTING_MIN_SPEED))
-
-                .state(State.RANDOM_1)
-                .transitionTimed(ZSTATE5_RANDOM_1_DURATION)
-                .onEnter(() -> currentTargetVelo = rpmToTicksPerSecond(Math.random() * (TESTING_MAX_SPEED - TESTING_MIN_SPEED) + TESTING_MIN_SPEED))
-
-                .state(State.RANDOM_2)
-                .transitionTimed(ZSTATE6_RANDOM_2_DURATION)
-                .onEnter(() -> currentTargetVelo = rpmToTicksPerSecond(Math.random() * (TESTING_MAX_SPEED - TESTING_MIN_SPEED) + TESTING_MIN_SPEED))
-
-                .state(State.RANDOM_3)
-                .transitionTimed(ZSTATE7_RANDOM_3_DURATION)
-                .onEnter(() -> currentTargetVelo = rpmToTicksPerSecond(Math.random() * (TESTING_MAX_SPEED - TESTING_MIN_SPEED) + TESTING_MIN_SPEED))
-
-                .state(State.REST)
-                .transitionTimed(ZSTATE8_REST_DURATION)
-                .onEnter(() -> currentTargetVelo = 0)
-
-                .exit(State.RAMPING_UP)
-
-                 */
 
                 .state(State.COASTING_1)
                 .transitionTimed(ZSTATE2_COASTING_1_DURATION)
