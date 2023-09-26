@@ -1,10 +1,11 @@
 # Eigen Comment
+Dit is de code voor onze [FTC](http://ftcnetherlands.eu/) robot 2022-2023 [POWERPLAY](https://docs.revrobotics.com/ftc-kickoff-concepts/powerplay-2022-2023/game-breakdown).
 
-Ik zou hier wel allemaal comments bij kunnen zetten als bij FreightFrenzyBasic maar op deze site staat alles perfect uitgelegd en gedocumenteerd van begin tot eind.
-https://learnroadrunner.com/
+De robot is gemaakt en geprogrammeerd door studenten van het Pius X College in Bladel.
 
 # Road Runner Quickstart
 
+A perfect explanation of roadrunner: https://learnroadrunner.com/
 An example FTC project using [Road Runner](https://github.com/acmerobotics/road-runner). **Note:** Road Runner is in alpha and many of its APIs are incubating.
 
 ## Installation
